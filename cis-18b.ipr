@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ArtifactManager">
-    <artifact type="exploded-ear" name="homework:ear exploded">
-      <output-path>$PROJECT_DIR$/out/artifacts/homework_ear_exploded</output-path>
-      <root id="root">
-        <element id="javaee-facet-resources" facet="homework/javaeeApplication/javaEEApplication" />
-      </root>
-    </artifact>
-  </component>
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
     <resourceExtensions />
