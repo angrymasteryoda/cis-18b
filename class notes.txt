@@ -1,0 +1,30 @@
++=================================================================+
+|                           02/25/15                              |
++=================================================================+
+create a abstract class
+
+abstract = abs sort
+    fill array procedure
+    
+concrete = base sort
+    constructor -> size
+    randomly fill array with 2 digits numbers
+    sort
+    print -> sorted + orignal array
+    
+inherited class = sort search
+    binary search
+
+polymorphic 
+    reference variable from base class
+    uses both base and inherited
+    output the sorted data
+    
+    
+    
+tower defence project 
+
+start with the gui
++=================================================================+
+|                           00/00/15                              |
++=================================================================+
