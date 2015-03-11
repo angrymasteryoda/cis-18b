@@ -2,43 +2,45 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="919ef3b6-34d1-41c0-a09a-f79559d44080" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/engine/Loader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/textures/ModelTexture.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/models/RawModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/engine/Renderer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/shaders/ShaderProgram.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/shaders/StaticShader.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/models/TexturedModel.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/exit status" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/shaders/fragmentShader.glsl" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/notes" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/shaders/vertexShader.glsl" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/project/src/game/MainGameLoop.java" afterPath="$PROJECT_DIR$/project/src/MainGameLoop.java" />
+<<<<<<< HEAD
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/engine/DisplayManger.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/src/game/MainGameLoop.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project/project.iml" />
+=======
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/homework/src/michael/assignment2/AbstractSort.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/homework/src/michael/assignment2/BaseSort.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/homework/src/michael/Main.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/homework/src/michael/assignment2/SortSearch.java" />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cis-18b.ipr" afterPath="$PROJECT_DIR$/cis-18b.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cis-18b.iws" afterPath="$PROJECT_DIR$/cis-18b.iws" />
     </list>
     <ignored path="cis-18b.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426032880310" ignored="false" />
+<<<<<<< HEAD
+    <file path="/Dummy.txt" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1425327047930" ignored="false" />
     <file path="$PROJECT_DIR$/homework/META-INF/application.xml" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1424725685615" ignored="false" />
     <file path="/Main.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1424734114234" ignored="false" />
     <file path="/fragment.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1425100621295" ignored="false" />
+=======
+    <file path="/Dummy.txt" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1425512740072" ignored="false" />
+    <file path="$PROJECT_DIR$/homework/META-INF/application.xml" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1424725685615" ignored="false" />
+    <file path="/Main.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1425517416186" ignored="false" />
+    <file path="/fragment.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1424919541115" ignored="false" />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
     <file path="/Rectangle.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1424728513086" ignored="false" />
     <file path="/a.php" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1424728872207" ignored="false" />
     <file path="/BasePlusCommissionEmployee.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1424734062289" ignored="false" />
     <file path="/CommissionEmployee.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1424733584206" ignored="false" />
+<<<<<<< HEAD
     <file path="/DisplayManger.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1425099990355" ignored="false" />
-    <file path="/MainGameLoop.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426044356267" ignored="false" />
-    <file path="/notes" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426043495943" ignored="false" />
-    <file path="/RawModel.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426034451435" ignored="false" />
-    <file path="/Loader.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426043074111" ignored="false" />
-    <file path="/Renderer.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426042334769" ignored="false" />
-    <file path="/vertexShader.glsl" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426042088070" ignored="false" />
-    <file path="/fragmentShader.glsl" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426042455489" ignored="false" />
-    <file path="/ShaderProgram.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426040450134" ignored="false" />
-    <file path="/exit status" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426039883268" ignored="false" />
-    <file path="/StaticShader.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426040587560" ignored="false" />
-    <file path="/ModelTexture.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426041166096" ignored="false" />
-    <file path="/TextureModel.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1426041518928" ignored="false" />
+    <file path="/MainGameLoop.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1425100167595" ignored="false" />
+=======
+    <file path="/Abstractclass.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1424918694489" ignored="false" />
+    <file path="/AbstractSort.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1425518173150" ignored="false" />
+    <file path="/BaseSort.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1425518192871" ignored="false" />
+    <file path="/SortSearch.java" changelist="919ef3b6-34d1-41c0-a09a-f79559d44080" time="1425518124895" ignored="false" />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,6 +55,10 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+<<<<<<< HEAD
+=======
+    <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -60,7 +66,6 @@
         <option name="ENABLED" value="false" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
         <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
@@ -77,7 +82,6 @@
         <option name="ENABLED" value="false" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
         <option name="SUSPEND_POLICY" value="SuspendAll" />
         <option name="SUSPEND" value="true" />
         <option name="COUNT_FILTER_ENABLED" value="false" />
@@ -93,116 +97,60 @@
     <breakpoint_rules />
     <ui_properties />
   </component>
-  <component name="DockManager">
-    <window id="1">
-      <content type="file-editors">
-        <state>
-          <leaf>
-            <file leaf-file-name="exit status" pinned="false" current="false" current-in-tab="true">
-              <entry file="file://$PROJECT_DIR$/project/exit status">
-                <provider selected="true" editor-type-id="text-editor">
-                  <state line="1" column="39" selection-start="75" selection-end="75" vertical-scroll-proportion="0.015384615">
-                    <folding />
-                  </state>
-                </provider>
-              </entry>
-            </file>
-          </leaf>
-        </state>
-      </content>
-    </window>
-  </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
     <favorites_list name="cis-18b" />
   </component>
   <component name="FileEditorManager">
     <leaf>
+<<<<<<< HEAD
+      <file leaf-file-name="DisplayManger.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/project/src/engine/DisplayManger.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="32" selection-start="233" selection-end="233" vertical-scroll-proportion="0.25531915">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+=======
+      <file leaf-file-name="AbstractSort.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment2/AbstractSort.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="30" selection-start="191" selection-end="191" vertical-scroll-proportion="0.0">
+              <folding />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="MainGameLoop.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/src/MainGameLoop.java">
+        <entry file="file://$PROJECT_DIR$/project/src/game/MainGameLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="76" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="notes" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/notes">
+            <state line="11" column="27" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0">
+=======
+      <file leaf-file-name="BaseSort.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment2/BaseSort.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="76" column="9" selection-start="1183" selection-end="1183" vertical-scroll-proportion="0.0">
+            <state line="69" column="23" selection-start="1890" selection-end="1890" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="vertexShader.glsl" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/src/shaders/vertexShader.glsl">
+      <file leaf-file-name="SortSearch.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment2/SortSearch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="21" selection-start="45" selection-end="58" vertical-scroll-proportion="0.0">
+            <state line="28" column="0" selection-start="594" selection-end="594" vertical-scroll-proportion="0.0">
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ShaderProgram.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/src/shaders/ShaderProgram.java">
+      <file leaf-file-name="Main.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/homework/src/michael/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="59" selection-start="2632" selection-end="2632" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fragmentShader.glsl" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/src/shaders/fragmentShader.glsl">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="7" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Loader.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/project/src/engine/Loader.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="107" column="41" selection-start="2863" selection-end="2863" vertical-scroll-proportion="0.7171975">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#709#718#0" expanded="true" />
-                <element signature="e#765#774#0" expanded="true" />
-                <element signature="e#825#834#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ModelTexture.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/src/textures/ModelTexture.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="5" selection-start="217" selection-end="217" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TexturedModel.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/src/models/TexturedModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="5" selection-start="388" selection-end="388" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Renderer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/project/src/engine/Renderer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="3" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0">
+            <state line="15" column="43" selection-start="291" selection-end="291" vertical-scroll-proportion="0.042713568">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -228,30 +176,35 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/project/src/RawModel.java" />
+        <option value="$PROJECT_DIR$/homework/src/michael/assignment1/main.java" />
+        <option value="$PROJECT_DIR$/homework/src/michael/assignment1/Rectangle.java" />
+        <option value="$PROJECT_DIR$/homework/src/michael/assignment1/CommissionEmployee.java" />
+        <option value="$PROJECT_DIR$/homework/src/michael/assignment1/BasePlusCommissionEmployee.java" />
+        <option value="$PROJECT_DIR$/homework/src/michael/assignment1/Main.java" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/project/src/game/MainGameLoop.java" />
-        <option value="$PROJECT_DIR$/project/src/Loader.java" />
-        <option value="$PROJECT_DIR$/project/src/Renderer.java" />
-        <option value="$PROJECT_DIR$/project/exit status" />
-        <option value="$PROJECT_DIR$/project/src/textures/ModelTexture.java" />
-        <option value="$PROJECT_DIR$/project/src/models/TextureModel.java" />
-        <option value="$PROJECT_DIR$/project/src/models/TexturedModel.java" />
-        <option value="$PROJECT_DIR$/project/src/shaders/vertexShader.glsl" />
-        <option value="$PROJECT_DIR$/project/src/shaders/StaticShader.java" />
-        <option value="$PROJECT_DIR$/project/src/shaders/ShaderProgram.java" />
-        <option value="$PROJECT_DIR$/project/src/shaders/fragmentShader.glsl" />
-        <option value="$PROJECT_DIR$/project/notes" />
-        <option value="$PROJECT_DIR$/project/src/engine/Renderer.java" />
-        <option value="$PROJECT_DIR$/project/src/MainGameLoop.java" />
-        <option value="$PROJECT_DIR$/project/src/engine/Loader.java" />
+        <option value="$PROJECT_DIR$/project/src/engine/DisplayManger.java" />
+=======
+        <option value="$PROJECT_DIR$/homework/src/michael/assignment2/Abstractclass.java" />
+        <option value="$PROJECT_DIR$/homework/src/michael/assignment2/SortSearch.java" />
+        <option value="$PROJECT_DIR$/homework/src/michael/assignment2/AbstractSort.java" />
+        <option value="$PROJECT_DIR$/homework/src/michael/assignment2/BaseSort.java" />
+        <option value="$PROJECT_DIR$/homework/src/michael/Main.java" />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-3" />
-    <option name="width" value="1926" />
-    <option name="height" value="1177" />
+<<<<<<< HEAD
+    <option name="width" value="1440" />
+    <option name="height" value="875" />
+=======
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1296" />
+    <option name="height" value="786" />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -279,6 +232,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -310,22 +264,8 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cis-18b" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="textures" />
+              <option name="myItemId" value="game" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -343,43 +283,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="shaders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cis-18b" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cis-18b" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="project" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="engine" />
+=======
+              <option name="myItemId" value="michael" />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -389,24 +297,61 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+<<<<<<< HEAD
               <option name="myItemId" value="project" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="lib" />
+=======
+              <option name="myItemId" value="homework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="michael" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assignment2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cis-18b" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="homework" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="michael" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="assignment1" />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="OverrideImplement.combined" value="true" />
+    <property name="OverrideImplement.combined" value="false" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
@@ -420,9 +365,9 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -471,7 +416,7 @@
     </configuration>
     <configuration default="false" name="Main" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="michael.assignment1.Main" />
+      <option name="MAIN_CLASS_NAME" value="michael.Main" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -494,7 +439,7 @@
     </configuration>
     <configuration default="false" name="Project" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="MainGameLoop" />
+      <option name="MAIN_CLASS_NAME" value="game.MainGameLoop" />
       <option name="VM_PARAMETERS" value="-Djava.library.path=lib/native-linux" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/project" />
@@ -505,13 +450,7 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="project" />
       <envs />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -540,6 +479,11 @@
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SliceManager">
+    <option name="analysisUIOptions">
+      <AnalysisUIOptions />
+    </option>
+  </component>
   <component name="StatisticProjectComponent">
     <option name="excludeCompilerOutput" value="true" />
     <option name="excludeIdea9ArtifactDirectory" value="true" />
@@ -552,6 +496,9 @@
     </option>
     <option name="fileTypes" value="class;svn-base;svn-work;Extra;gif;png;jpg;jpeg;bmp;tga;tiff;ear;war;zip;jar;iml;iws;ipr;bz2;gz;" />
   </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value="SHOW_INHERITED,ALPHA_COMPARATOR" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="919ef3b6-34d1-41c0-a09a-f79559d44080" name="Default" comment="" />
@@ -561,29 +508,48 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3" y="0" width="1926" height="1177" extended-state="6" />
+<<<<<<< HEAD
+    <frame x="0" y="0" width="1440" height="875" extended-state="0" />
+    <editor active="false" />
+    <layout>
+=======
+    <frame x="-8" y="-8" width="1296" height="786" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3297769" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14194237" sideWeight="0.78661495" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3986421" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17600575" sideWeight="0.6707819" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39917696" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24980111" sideWeight="0.67194927" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17581543" sideWeight="0.67194927" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3977813" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21338506" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3296355" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3280507" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+<<<<<<< HEAD
       <window_info id="Statistic" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+=======
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
       <window_info id="JavaEE:App" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -614,7 +580,7 @@
     <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
     <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
     <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
-    <option name="SHORT_DIFF_HORIZONTALLY" value="true" />
+    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
     <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
     <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
     <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
@@ -624,10 +590,6 @@
     <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
     <option name="LIMIT_HISTORY" value="true" />
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
-    <option name="UPDATE_FILTER_SCOPE_NAME" />
-    <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
-    <option name="COMMIT_MESSAGE_MARGIN_SIZE" value="72" />
-    <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
     <option name="LAST_COMMIT_MESSAGE" />
@@ -641,7 +603,6 @@
     <option name="ACTIVE_VCS_NAME" />
     <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
-    <option name="UPDATE_FILTER_BY_SCOPE" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
   </component>
@@ -649,6 +610,104 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/project/src/engine/DisplayManger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="32" selection-start="233" selection-end="233" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+=======
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="26" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/CommissionEmployee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="33" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/BasePlusCommissionEmployee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="33" selection-start="1857" selection-end="1857" vertical-scroll-proportion="0.0">
+          <folding />
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/src/engine/DisplayManger.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state line="24" column="26" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" />
+=======
+        <state line="24" column="26" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/CommissionEmployee.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state line="8" column="33" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0" />
+=======
+        <state line="8" column="33" selection-start="160" selection-end="160" vertical-scroll-proportion="0.028099174">
+          <folding />
+        </state>
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/BasePlusCommissionEmployee.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state line="54" column="33" selection-start="1857" selection-end="1857" vertical-scroll-proportion="0.0" />
+=======
+        <state line="54" column="33" selection-start="1857" selection-end="1857" vertical-scroll-proportion="0.38181818">
+          <folding />
+        </state>
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment2/SortSearch.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state line="24" column="26" selection-start="527" selection-end="527" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/CommissionEmployee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="33" selection-start="160" selection-end="160" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/BasePlusCommissionEmployee.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="33" selection-start="1857" selection-end="1857" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/Rectangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="0" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="26" selection-start="527" selection-end="527" vertical-scroll-proportion="0.021276595" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment1/CommissionEmployee.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="33" selection-start="160" selection-end="160" vertical-scroll-proportion="0.021276595" />
@@ -661,109 +720,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/project/src/engine/DisplayManger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="851" selection-end="851" vertical-scroll-proportion="0.0">
+        <state line="12" column="32" selection-start="233" selection-end="233" vertical-scroll-proportion="0.25531915">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/models/RawModel.java">
+    <entry file="file://$PROJECT_DIR$/project/src/game/MainGameLoop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="21" selection-start="131" selection-end="131" vertical-scroll-proportion="0.0">
+        <state line="11" column="27" selection-start="202" selection-end="202" vertical-scroll-proportion="0.0">
+=======
+        <state line="28" column="0" selection-start="594" selection-end="594" vertical-scroll-proportion="0.0">
+>>>>>>> 686cede35e65b86efec54b2c62263321843d0e23
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/shaders/StaticShader.java">
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment2/BaseSort.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="46" selection-start="500" selection-end="500" vertical-scroll-proportion="0.0">
+        <state line="69" column="23" selection-start="1890" selection-end="1890" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/shaders/vertexShader.glsl">
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/assignment2/AbstractSort.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="21" selection-start="45" selection-end="58" vertical-scroll-proportion="0.0">
+        <state line="10" column="30" selection-start="191" selection-end="191" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/shaders/fragmentShader.glsl">
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/Rar$DIa0.594/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="7" selection-start="26" selection-end="26" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/textures/ModelTexture.java">
+    <entry file="file://$PROJECT_DIR$/homework/src/michael/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="5" selection-start="217" selection-end="217" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/notes">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="9" selection-start="1183" selection-end="1183" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/models/TexturedModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="5" selection-start="388" selection-end="388" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/engine/Renderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="3" selection-start="194" selection-end="194" vertical-scroll-proportion="0.0">
+        <state line="15" column="43" selection-start="291" selection-end="291" vertical-scroll-proportion="0.042713568">
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/MainGameLoop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="76" selection-start="1025" selection-end="1025" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/shaders/ShaderProgram.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="59" selection-start="2632" selection-end="2632" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/res/sunset.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/exit status">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="39" selection-start="75" selection-end="75" vertical-scroll-proportion="0.015384615">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/src/engine/Loader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="107" column="41" selection-start="2863" selection-end="2863" vertical-scroll-proportion="0.7171975">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#709#718#0" expanded="true" />
-            <element signature="e#765#774#0" expanded="true" />
-            <element signature="e#825#834#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -779,7 +778,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -827,7 +825,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>

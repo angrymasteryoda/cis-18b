@@ -1,0 +1,97 @@
+~~~~~~~~~~~~~~~~~~~~~~VBA AND VBO ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+VAO = vertex array objects
+storing and rendering object
+stores data about 3d model has slot called attribute list where you can store data about the model
+like this
+0 vertex position
+1 vertex colors
+2 normal vectors
+3 texture coords
+
+they are stored in this vba as VBO
+VBO = vertex buffer objects
+vbo is just data could be anything
+
+vao is stored with an id so we can find it later
+~~~~~~~~~~~~~~~~~~~~~~~~SHADERS~~~~~~~~~~~~~~~~~~~~~~~~~
+CPU handles
+game logic
+calculations
+gameplay
+
+GPU handles
+renders ur objs to the screen
+determines the positions, color, texture
+can also scale, lighting shadows
+
+shaders are written in gsls
+vertex shader
+ exceutes one time for each vertex in the model
+
+input
+	xyz coords
+out
+	vertex poos onscreen
+	anything whatever you program it to output
+
+fragment shader
+ exceutes one time for each pixel in the model
+input
+	output from the vertex shader
+output
+	color of the pixel
+
+
+
+
+
+
+
+
+nope
+0,0, //v0
+0,1, //v1
+1,1, //v2
+1,0, //v3
+
+nope
+0,1, //v1
+0,0, //v0
+1,1, //v2
+1,0, //v3
+
+nope
+0,0, //v0
+1,1, //v2
+0,1, //v1
+1,0, //v3
+
+nope
+0,0, //v0
+1,1, //v2
+1,0, //v3
+0,1, //v1
+
+
+0,0, //v0
+0,1, //v1
+1,1, //v2
+1,0, //v3
+
+
+0,0, //v0
+0,1, //v1
+1,1, //v2
+1,0, //v3
+
+
+0,0, //v0
+0,1, //v1
+1,1, //v2
+1,0, //v3
+
+
+0,0, //v0
+0,1, //v1
+1,1, //v2
+1,0, //v3
