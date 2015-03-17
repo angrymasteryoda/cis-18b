@@ -1,9 +1,6 @@
 package michael;
 
-import michael.assignment2.BaseSort;
 import michael.assignment2.SortSearch;
-
-import javax.swing.*;
 
 /**
  * Created By: Michael Risher

@@ -1,0 +1,5 @@
+*.iws
+/Project/JavaApplication5/nbproject/private/
+/Project/nbproject/private/
+/Project/build/
+/Project/dist/
