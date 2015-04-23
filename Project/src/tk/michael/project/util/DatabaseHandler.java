@@ -4,6 +4,7 @@ import tk.michael.project.gui.MainWindow;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created By: Michael Risher
@@ -18,12 +19,25 @@ public class DatabaseHandler {
 
 	public DatabaseHandler() {}
 
-	public static void addDatabase( String name, String host, String port, String username, String password ){
-		Database db = new Database( name, host, port, username, password );
+	public static void addDatabase( String name, String host, String port, String username, String password, String database ){
+		Database db = new Database( name, host, port, username, password, database );
 
 		databases.add( db );
 		MainWindow.GetInstance().addDatabase( db );
 		serialize();
+	}
+
+	public static boolean deleteDatabase( UUID id ){
+		for ( int i = 0; i < databases.size(); i++ ){
+		    Database db = databases.get( i );
+			if ( db.getId().equals( id ) ) {
+				databases.remove( i );
+				MainWindow.GetInstance().removeDatabase( id );
+				//serialize();
+				return true;
+			}
+		}
+		return false;
 	}
 
 	private static void serialize(){
@@ -64,24 +78,4 @@ public class DatabaseHandler {
 			mainWindow.addDatabase( db );
 		}
 	}
-
-	/*
-
-      {
-         FileInputStream fileIn = new FileInputStream("/tmp/employee.ser");
-         ObjectInputStream in = new ObjectInputStream(fileIn);
-         e = (Employee) in.readObject();
-         in.close();
-         fileIn.close();
-      }catch(IOException i)
-      {
-         i.printStackTrace();
-         return;
-      }catch(ClassNotFoundException c)
-      {
-         System.out.println("Employee class not found");
-         c.printStackTrace();
-         return;
-      }
-	 */
 }

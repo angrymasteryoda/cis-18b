@@ -1,6 +1,7 @@
 package tk.michael.project.util;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Created By: Michael Risher
@@ -8,18 +9,22 @@ import java.io.Serializable;
  * Time: 5:06 PM
  */
 public class Database implements Serializable {
+	private final UUID id;
 	private String name;
 	private String host;
 	private String port;
 	private String username;
 	private String password; //todo encrypt this
+	private String databaseName;
 
-	public Database( String name, String host, String port, String username, String password ) {
+	public Database( String name, String host, String port, String username, String password, String databaseName ) {
+		this.id = UUID.randomUUID();
 		this.name = name;
 		this.host = host;
 		this.port = port;
 		this.username = username;
 		this.password = password;
+		this.databaseName = databaseName;
 	}
 
 	public String getName() {
@@ -60,5 +65,21 @@ public class Database implements Serializable {
 
 	public void setPort( String port ) {
 		this.port = port;
+	}
+
+	public String getDatabaseName() {
+		return databaseName;
+	}
+
+	public void setDatabaseName( String databaseName ) {
+		this.databaseName = databaseName;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public String getUrl(){
+		return "jdbc:mysql://" + host + ":" + port + "/" + getDatabaseName();
 	}
 }

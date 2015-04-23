@@ -1,11 +1,13 @@
 package tk.michael.project.gui;
 
 import net.miginfocom.swing.MigLayout;
+import tk.michael.project.Main;
 import tk.michael.project.util.Database;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created By: Michael Risher
@@ -42,10 +44,10 @@ public class MainWindow extends BasicFrameObject{
 	public void init(){
 		initMenu();
 
-		panel = new JPanel( new MigLayout( "w 800px, h 600px" ) );
+		panel = new JPanel( new MigLayout( "w 800px, h 600px" + ( Main.isDebugView() ? ",debug" : "" ) ) );
 		panel.setBackground( new Color( 0x777777 ) );
 
-		JPanel databox = new DatabaseBox( "local mysql", "localhost", "root"  ).getPanel();
+		JPanel databox = new DatabaseBox( UUID.randomUUID(), "local mysql", "localhost", "root"  ).getPanel();
 
 		panel.add( databox );
 
@@ -53,6 +55,7 @@ public class MainWindow extends BasicFrameObject{
 
 		frame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
 		frame.pack();
+		frame.setLocationRelativeTo( null );
 	}
 
 	public void initMenu(){
@@ -72,13 +75,35 @@ public class MainWindow extends BasicFrameObject{
 
 	public void addDatabase( Database db ){
 		String host = db.getHost() + ":" + db.getPort();
-		DatabaseBox dbb = new DatabaseBox( db.getName(), host, db.getUsername() );
+		DatabaseBox dbb = new DatabaseBox( db.getId(), db.getName(), host, db.getUsername() );
 		databaseBoxes.add( dbb );
 
 		panel.add( dbb.getPanel() );
 		frame.validate();
 		frame.pack();
 
+	}
+
+	public void removeDatabase( UUID id ){
+		for ( int i = 0; i < databaseBoxes.size(); i++ ){
+		    DatabaseBox dbb = databaseBoxes.get( i );
+			if ( dbb.getId().equals( id ) ) {
+				frame.remove( dbb.getPanel() );
+				frame.validate();
+				frame.pack();
+				return;
+			}
+		}
+		/*
+		for ( int i = 0; i < databases.size(); i++ ){
+		    Database db = databases.get( i );
+			if ( db.getId().equals( id ) ) {
+				databases.remove( i );
+				serialize();
+				return true;
+			}
+		}
+		 */
 	}
 }
 

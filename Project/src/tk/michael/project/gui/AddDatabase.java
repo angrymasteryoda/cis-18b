@@ -1,6 +1,8 @@
 package tk.michael.project.gui;
 
 import net.miginfocom.swing.MigLayout;
+import tk.michael.project.util.Database;
+import tk.michael.project.connecter.*;
 import tk.michael.project.util.DatabaseHandler;
 
 import javax.swing.*;
@@ -17,10 +19,6 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 
 	private HashMap< String, RegexTextField > textFields = new HashMap<>();
 	private HashMap< String, MLabel > labels = new HashMap<>();
-
-	private JButton confirm;
-	private JButton cancel;
-	private JButton testConnection;
 
 	public AddDatabase() {
 		super( "Add Database" );
@@ -46,15 +44,19 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 		labels.put( "pass", new MLabel( "Password:" ) );
 		textFields.put( "pass", new RegexTextField( 20, null ) );
 
-		confirm = new JButton( "OK" );
+		labels.put( "database", new MLabel( "Database:" ) );
+		textFields.put( "database", new RegexTextField( 20, null ) );
+		textFields.get( "database" ).setToolTipText( "Default database to use" );
+
+		JButton confirm = new JButton( "OK" );
 		confirm.setActionCommand( "create" );
 		confirm.addActionListener( this );
 
-		cancel = new JButton( "Cancel" );
+		JButton cancel = new JButton( "Cancel" );
 		cancel.setActionCommand( "cancel" );
 		cancel.addActionListener( this );
 
-		testConnection = new JButton( "Test Connection" );
+		JButton testConnection = new JButton( "Test Connection" );
 		testConnection.setActionCommand( "test" );
 		testConnection.addActionListener( this );
 
@@ -68,6 +70,8 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 		panel.add( textFields.get( "user" ), "wrap" );
 		panel.add( labels.get( "pass" ) );
 		panel.add( textFields.get( "pass" ), "wrap" );
+		panel.add( labels.get( "database" ), "gaptop 20px" );
+		panel.add( textFields.get( "database" ), "wrap" );
 
 		panel.add( confirm, "skip, split 3" );
 		panel.add( cancel, "" );
@@ -76,6 +80,7 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 		frame.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
 		frame.add( panel );
 		frame.pack();
+		frame.setLocationRelativeTo( null );
 	}
 
 	@Override
@@ -98,7 +103,8 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 					textFields.get( "host" ).getText(),
 					textFields.get( "port" ).getText(),
 					textFields.get( "user" ).getText(),
-					textFields.get( "pass" ).getText()
+					textFields.get( "pass" ).getText(),
+					textFields.get(  "database" ).getText()
 				);
 				frame.dispose();
 			}
@@ -109,6 +115,22 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 
 		if ( action.equals( "test" ) ) {
 			//todo figure out the code for this
+			Database db = new Database(
+				textFields.get( "name" ).getText(),
+				textFields.get( "host" ).getText(),
+				textFields.get( "port" ).getText(),
+				textFields.get( "user" ).getText(),
+				textFields.get( "pass" ).getText(),
+				textFields.get(  "database" ).getText()
+			);
+
+			boolean state = ConnectedDb.testConnection( db.getUrl(), db.getUsername(), db.getPassword() );
+			String message = "Connected successfully!";
+			if ( !state ) {
+				message = "Unable to connect.";
+			}
+
+			JOptionPane.showMessageDialog( frame, message );
 		}
 	}
 }
