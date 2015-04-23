@@ -1,35 +1,19 @@
 package tk.michael.project;
 
+import tk.michael.project.gui.AddDatabase;
+import tk.michael.project.gui.MainWindow;
+import tk.michael.project.util.DatabaseHandler;
+
 /**
  * Created By: Michael Risher
- * Date: 3/11/15
- * Time: 5:36 PM
+ * Date: 4/22/15
+ * Time: 4:02 PM
  */
-public class main {
+public class Main {
 
-	public static void main( String[] args ) {
-		setNimbus();
-
-		new Tester().setVisible( true );
-
-        /* Create and display the form */
-//		java.awt.EventQueue.invokeLater( new Runnable() {
-//			public void run() {
-//				new MainWindow().setVisible( true );
-//			}
-//		} );
-	}
-
-	public static void setNimbus() {
-		try {
-			for ( javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels() ) {
-				if ( "Nimbus".equals( info.getName() ) ) {
-					javax.swing.UIManager.setLookAndFeel( info.getClassName() );
-					break;
-				}
-			}
-		} catch ( Exception ex ) {
-			java.util.logging.Logger.getLogger( MainWindow.class.getName() ).log( java.util.logging.Level.SEVERE, null, ex );
-		}
+	public static void main( String[] args ){
+		MainWindow.GetInstance().display();
+		DatabaseHandler.load();
+//		new AddDatabase().display();
 	}
 }

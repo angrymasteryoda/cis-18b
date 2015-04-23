@@ -12,7 +12,9 @@
         <CLASSES>
           <root url="jar://$MODULE_DIR$/lib/myApi-v1.jar!/" />
         </CLASSES>
-        <JAVADOC />
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/lib/myApi-v1-doc.jar!/" />
+        </JAVADOC>
         <SOURCES />
       </library>
     </orderEntry>
