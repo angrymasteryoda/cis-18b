@@ -1,5 +1,6 @@
 package tk.michael.project.util;
 
+import com.michael.api.IO.IO;
 import tk.michael.project.gui.MainWindow;
 
 import java.io.*;
@@ -15,7 +16,8 @@ public class DatabaseHandler {
 
 	private static ArrayList<Database> databases = new ArrayList<>();
 
-	private static final String OUT_FILE_NAME = "data/server.dat";
+	private static String outFileDir = "data";
+	private static String outFileName = outFileDir + "/server.dat";
 
 	public DatabaseHandler() {}
 
@@ -23,7 +25,20 @@ public class DatabaseHandler {
 		Database db = new Database( name, host, port, username, password, database );
 
 		databases.add( db );
-		MainWindow.GetInstance().addDatabase( db );
+		MainWindow.GetInstance().updateDatabase();
+		serialize();
+	}
+
+	public static void editDatabase( Database db ) {
+		getDabase( db.getId() ).setName( db.getName() );
+		getDabase( db.getId() ).setHost( db.getHost() );
+		getDabase( db.getId() ).setPort( db.getPort() );
+		getDabase( db.getId() ).setUsername( db.getUsername() );
+		getDabase( db.getId() ).setPassword( db.getPassword() );
+		getDabase( db.getId() ).setDatabaseName( db.getDatabaseName() );
+
+		IO.println( getDabase( db.getId() ) );
+		MainWindow.GetInstance().updateDatabase();
 		serialize();
 	}
 
@@ -32,22 +47,22 @@ public class DatabaseHandler {
 		    Database db = databases.get( i );
 			if ( db.getId().equals( id ) ) {
 				databases.remove( i );
-				MainWindow.GetInstance().removeDatabase( id );
-				//serialize();
+				MainWindow.GetInstance().updateDatabase();
+				serialize();
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private static void serialize(){
+	public static void serialize(){
 		try {
-			File testFile = new File( OUT_FILE_NAME );
+			File testFile = new File( outFileName );
 			if ( !testFile.exists() ) {
 				testFile.getParentFile().mkdir();
 				testFile.createNewFile();
 			}
-			FileOutputStream file = new FileOutputStream( OUT_FILE_NAME );
+			FileOutputStream file = new FileOutputStream( outFileName );
 			ObjectOutputStream out = new ObjectOutputStream( file );
 			out.writeObject( databases );
 			out.close();
@@ -60,22 +75,44 @@ public class DatabaseHandler {
 	@SuppressWarnings( "unchecked" )
 	public static void load(){
 		try {
-			FileInputStream file = new FileInputStream( OUT_FILE_NAME );
+			FileInputStream file = new FileInputStream( outFileName );
 			ObjectInputStream in = new ObjectInputStream( file );
 			databases = (ArrayList<Database>) in.readObject();
 			in.close();
 			file.close();
 		} catch ( IOException e ){
 			databases = new ArrayList<Database>();
-			return;
 		} catch ( ClassNotFoundException e ){
 			e.printStackTrace();
 			return;
 		}
 
-		MainWindow mainWindow = MainWindow.GetInstance();
-		for( Database db : databases ){
-			mainWindow.addDatabase( db );
+		if ( databases.size() == 0 ) {
+			databases.add( new Database( "Localhost", "localhost", "3306", "root", "", "" ) );
 		}
+	}
+
+	public static Database getDabase( UUID id ){
+		for ( int i = 0; i < databases.size(); i++ ){
+			if ( databases.get( i ).getId().equals( id ) ) {
+				return databases.get( i );
+			}
+		}
+		return null;
+	}
+
+	public static ArrayList<Database> getDatabases() {
+		return databases;
+	}
+
+	public static void deleteAllDatabases(){
+		databases.clear();
+		MainWindow.GetInstance().updateDatabase();
+		serialize();
+	}
+
+	public static void setOutFileDir( String outFileDir ) {
+		DatabaseHandler.outFileDir = outFileDir;
+		outFileName = outFileDir + "/server.dat";
 	}
 }

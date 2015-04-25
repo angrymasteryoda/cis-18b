@@ -82,4 +82,9 @@ public class Database implements Serializable {
 	public String getUrl(){
 		return "jdbc:mysql://" + host + ":" + port + "/" + getDatabaseName();
 	}
+
+	@Override
+	public String toString(){
+		return ( host + ":" + port + " -u " + username + " db" + databaseName );
+	}
 }

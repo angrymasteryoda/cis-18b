@@ -1,11 +1,19 @@
 package tk.michael.project.gui;
 
+import com.michael.api.IO.IO;
 import net.miginfocom.swing.MigLayout;
 import tk.michael.project.Main;
 import tk.michael.project.util.Database;
+import tk.michael.project.util.DatabaseHandler;
 
+import javax.activation.DataHandler;
 import javax.swing.*;
+import javax.swing.event.MouseInputListener;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -14,16 +22,19 @@ import java.util.UUID;
  * Date: 4/22/15
  * Time: 4:02 PM
  */
-public class MainWindow extends BasicFrameObject{
+public class MainWindow extends BasicFrameObject implements MouseListener, ComponentListener{
 
 	private static MainWindow instance = null;
-	private JPanel panel;
+	private JPanel dbPanel;
 	private ArrayList<DatabaseBox> databaseBoxes = new ArrayList<>();
 
+	private int dbWidth = 738; // starting db width
+
 	protected MainWindow(){
-		super( "title" );
+		super( "Database Workbench" );
 		init();
 		instance = this;
+		IO.println( dbPanel.getWidth() );
 	}
 
 	public static MainWindow GetInstance(){
@@ -42,16 +53,35 @@ public class MainWindow extends BasicFrameObject{
 	}
 
 	public void init(){
+		String width = "w " + dbWidth + "px!";
 		initMenu();
+		frame.setLayout( new BorderLayout(  ) );
+		frame.addComponentListener( this );
 
-		panel = new JPanel( new MigLayout( "w 800px, h 600px" + ( Main.isDebugView() ? ",debug" : "" ) ) );
-		panel.setBackground( new Color( 0x777777 ) );
+		JPanel topPanel = new JPanel( new MigLayout( width + ", h 35px!" + ( Main.isDebugView() ? ",debug" : "" ) ) );
+		topPanel.setBackground( new Color( 0x222222 ) );
+		JLabel info = new JLabel( "Your Mysql Servers" );
+		info.setForeground( Color.WHITE );
+		JLabel addLabel = new JLabel( new ImageIcon( getClass().getResource( "/addDatabase.png" ) ) );
+		addLabel.setToolTipText( "Add Database" );
+		addLabel.addMouseListener( this );
+		addLabel.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
 
-		JPanel databox = new DatabaseBox( UUID.randomUUID(), "local mysql", "localhost", "root"  ).getPanel();
+		topPanel.add( addLabel, "dock west, w 40!, pad 5 0 5 0" );
+		topPanel.add( info, "dock west, pad 5 15 5 0, w 150! " );
 
-		panel.add( databox );
+		frame.add( topPanel, BorderLayout.NORTH );
 
-		frame.add( panel );
+		dbPanel = new JPanel( new MigLayout( width + ", h 600px" + ( Main.isDebugView() ? ",debug" : "" ) ) );
+		dbPanel.setBackground( new Color( 0x777777 ) );
+
+//		JPanel databox = new DatabaseBox( UUID.randomUUID(), "local mysql", "localhost", "root"  ).getPanel();
+
+//		dbPanel.add( databox, BorderLayout.CENTER );
+
+		updateDatabase();
+
+		frame.add( dbPanel, BorderLayout.CENTER );
 
 		frame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
 		frame.pack();
@@ -62,48 +92,69 @@ public class MainWindow extends BasicFrameObject{
 		JMenuBar menuBar = new JMenuBar();
 		JMenu file = new JMenu( "File" );
 		file.setMnemonic( 'F' );
-		JMenuItem exit = MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Exit", "exitApp", 'X', "Close the application" );
+
+		MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Load", "loadDbs", 'L', "Load from custom location" );
+		MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Set Save Location", "saveLoc", 0, "Sets the default save location" );
+		MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Exit", "exitApp", 'X', "Close the application" );
 
 		JMenu database = new JMenu( "Database" );
 		file.setMnemonic( 'd' );
-		JMenuItem addDatabase = MenuHelper.createMenuItem( database, MenuHelper.PLAIN, "Add Database", "addDatabase", 0,"Add a database" );
+		MenuHelper.createMenuItem( database, MenuHelper.PLAIN, "Add Database", "addDatabase", 0,"Add a database" );
+		MenuHelper.createMenuItem( database, MenuHelper.PLAIN, "Remove All Databases", "rmAllDbs", 0,"Remove all databases" );
 
 		menuBar.add( file );
 		menuBar.add( database );
 		frame.setJMenuBar( menuBar );
 	}
 
-	public void addDatabase( Database db ){
-		String host = db.getHost() + ":" + db.getPort();
-		DatabaseBox dbb = new DatabaseBox( db.getId(), db.getName(), host, db.getUsername() );
-		databaseBoxes.add( dbb );
-
-		panel.add( dbb.getPanel() );
+	public void updateDatabase(){
+		ArrayList<Database> dbs = DatabaseHandler.getDatabases();
+		int width = dbPanel.getWidth() == 0 ? dbWidth : dbPanel.getWidth();
+		float limit = width / 184.5f;
+		dbPanel.removeAll();
+		for ( int i = 0; i < dbs.size(); i++ ){
+			if ( i != 0 && i % ( (int) Math.floor( limit ) - 1 )== 0 ) {
+				dbPanel.add( new DatabaseBox( dbs.get( i ) ).getPanel(), "wrap" );
+			}
+			else {
+				dbPanel.add( new DatabaseBox( dbs.get( i ) ).getPanel() );
+			}
+		}
+		dbPanel.repaint();
 		frame.validate();
-		frame.pack();
+	}
+//184.5
 
+	@Override
+	public void mouseClicked( MouseEvent e ) {
+		new AddDatabase().display();
 	}
 
-	public void removeDatabase( UUID id ){
-		for ( int i = 0; i < databaseBoxes.size(); i++ ){
-		    DatabaseBox dbb = databaseBoxes.get( i );
-			if ( dbb.getId().equals( id ) ) {
-				frame.remove( dbb.getPanel() );
-				frame.validate();
-				frame.pack();
-				return;
-			}
-		}
-		/*
-		for ( int i = 0; i < databases.size(); i++ ){
-		    Database db = databases.get( i );
-			if ( db.getId().equals( id ) ) {
-				databases.remove( i );
-				serialize();
-				return true;
-			}
-		}
-		 */
+	@Override
+	public void mousePressed( MouseEvent e ) {}
+
+	@Override
+	public void mouseReleased( MouseEvent e ) {}
+
+	@Override
+	public void mouseEntered( MouseEvent e ) {}
+
+	@Override
+	public void mouseExited( MouseEvent e ) {}
+
+	@Override
+	public void componentResized( ComponentEvent e ) {
+		IO.println( dbPanel.getWidth() );
+		updateDatabase();
 	}
+
+	@Override
+	public void componentMoved( ComponentEvent e ) {}
+
+	@Override
+	public void componentShown( ComponentEvent e ) {}
+
+	@Override
+	public void componentHidden( ComponentEvent e ) {}
 }
 

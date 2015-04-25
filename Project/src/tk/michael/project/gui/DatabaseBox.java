@@ -5,6 +5,7 @@ import com.sun.corba.se.impl.protocol.NotLocalLocalCRDImpl;
 import com.sun.deploy.net.proxy.RemoveCommentReader;
 import net.miginfocom.swing.MigLayout;
 import tk.michael.project.Main;
+import tk.michael.project.util.Database;
 import tk.michael.project.util.DatabaseHandler;
 
 import javax.imageio.ImageIO;
@@ -33,6 +34,11 @@ public class DatabaseBox implements MouseListener{
 	private JLabel edit;
 	private JLabel remove;
 
+	public DatabaseBox( Database db ) {
+		this.id = db.getId();
+		init( db.getName(), db.getHost() + ":" + db.getPort(), db.getUsername() );
+	}
+
 	public DatabaseBox( UUID id, String name, String host, String username ) {
 		this.id = id;
 		init( name, host, username );
@@ -46,8 +52,13 @@ public class DatabaseBox implements MouseListener{
 		username = new MLabel( usernameStr );
 		edit = new JLabel( new ImageIcon( getClass().getResource( "/editDatabase.png" ) ) );
 		edit.addMouseListener( this );
+		edit.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+		edit.setToolTipText( "Edit database" );
+
 		remove = new JLabel( new ImageIcon( getClass().getResource( "/removeDatabase.png" ) ) );
 		remove.addMouseListener( this );
+		remove.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+		remove.setToolTipText( "Delete database" );
 
 		name.setBasicStyle();
 		host.setBasicStyle();
@@ -71,7 +82,7 @@ public class DatabaseBox implements MouseListener{
 	@Override
 	public void mouseClicked( MouseEvent e ) {
 		if ( e.getSource() == edit ) {
-			IO.println( "clicked edit" );
+			new EditDatabase( DatabaseHandler.getDabase( id ) ).display();
 		}
 
 		if ( e.getSource() == remove ) {

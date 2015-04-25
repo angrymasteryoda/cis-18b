@@ -1,6 +1,7 @@
 package tk.michael.project;
 
 import tk.michael.project.gui.AddDatabase;
+import tk.michael.project.gui.DirectoryChooser;
 import tk.michael.project.gui.MainWindow;
 import tk.michael.project.util.DatabaseHandler;
 
@@ -19,8 +20,9 @@ public class Main {
 		if ( Arrays.asList( args ).contains( "debugview".toLowerCase() ) ) {
 			debugView = true;
 		}
-		MainWindow.GetInstance().display();
 		DatabaseHandler.load();
+//		new DirectoryChooser( "title" );
+		MainWindow.GetInstance().display();
 //		new AddDatabase().display();
 	}
 

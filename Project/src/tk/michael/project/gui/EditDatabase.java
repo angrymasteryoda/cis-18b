@@ -1,8 +1,8 @@
 package tk.michael.project.gui;
 
 import net.miginfocom.swing.MigLayout;
+import tk.michael.project.connecter.ConnectedDb;
 import tk.michael.project.util.Database;
-import tk.michael.project.connecter.*;
 import tk.michael.project.util.DatabaseHandler;
 
 import javax.swing.*;
@@ -12,16 +12,18 @@ import java.util.HashMap;
 
 /**
  * Created By: Michael Risher
- * Date: 4/22/15
- * Time: 6:35 PM
+ * Date: 4/25/15
+ * Time: 2:40 AM
  */
-public class AddDatabase extends BasicFrameObject implements ActionListener{
+public class EditDatabase extends BasicFrameObject implements ActionListener {
 
 	private HashMap< String, RegexTextField > textFields = new HashMap<>();
 	private HashMap< String, MLabel > labels = new HashMap<>();
+	private Database db;
 
-	public AddDatabase() {
-		super( "Add Database" );
+	public EditDatabase( Database db ) {
+		super( "Editing "  + db.getName() );
+		this.db = db;
 		init();
 	}
 
@@ -30,22 +32,22 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 		JPanel panel = new JPanel( new MigLayout(  ) );
 
 		labels.put( "name", new MLabel( "Name:" ) );
-		textFields.put( "name", new RegexTextField( 20, "notempty" ) );
+		textFields.put( "name", new RegexTextField( db.getName(), 20, "notempty" ) );
 
 		labels.put( "host", new MLabel( "Host:" ) );
-		textFields.put( "host", new RegexTextField( 11, "notempty"  ) );
+		textFields.put( "host", new RegexTextField( db.getHost(), 11, "notempty" ) );
 
 		labels.put( "port", new MLabel( "Port:" ) );
-		textFields.put( "port", new RegexTextField( "3306", 5, "^0*(110,?000|((10[0-9]|[1-9][0-9]|[1-9]),?[0-9]{3})|([1-9][0-9]{2}|[1-9][0-9]|[1-9]))$" ) );
+		textFields.put( "port", new RegexTextField( db.getPort(), 5, "^0*(110,?000|((10[0-9]|[1-9][0-9]|[1-9]),?[0-9]{3})|([1-9][0-9]{2}|[1-9][0-9]|[1-9]))$" ) );
 
 		labels.put( "user", new MLabel( "Username:" ) );
-		textFields.put( "user", new RegexTextField( 20, "notempty"  ) );
+		textFields.put( "user", new RegexTextField( db.getUsername(), 20, "notempty" ) );
 
 		labels.put( "pass", new MLabel( "Password:" ) );
-		textFields.put( "pass", new RegexTextField( 20, null ) );
+		textFields.put( "pass", new RegexTextField( db.getPassword(), 20, null ) );
 
 		labels.put( "database", new MLabel( "Database:" ) );
-		textFields.put( "database", new RegexTextField( 20, null ) );
+		textFields.put( "database", new RegexTextField( db.getDatabaseName(), 20, null ) );
 		textFields.get( "database" ).setToolTipText( "Default database to use" );
 
 		JButton confirm = new JButton( "OK" );
@@ -85,7 +87,7 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 
 	@Override
 	void initMenu() {
-		//no menus here
+		//no menus
 	}
 
 	@Override
@@ -114,18 +116,18 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 			}
 
 			if ( ok ) {
-				DatabaseHandler.addDatabase(
-					textFields.get( "name" ).getText(),
-					textFields.get( "host" ).getText(),
-					textFields.get( "port" ).getText(),
-					textFields.get( "user" ).getText(),
-					textFields.get( "pass" ).getText(),
-					textFields.get(  "database" ).getText()
-				);
+				db.setName( textFields.get( "name" ).getText() );
+				db.setHost( textFields.get( "host" ).getText() );
+				db.setPort( textFields.get( "port" ).getText() );
+				db.setUsername( textFields.get( "user" ).getText() );
+				db.setPassword( textFields.get( "pass" ).getText() );
+				db.setDatabaseName( textFields.get( "database" ).getText() );
+
+				DatabaseHandler.editDatabase( db );
 				frame.dispose();
 			}
 			else{
-				JOptionPane.showMessageDialog( frame, msg + "</ul></html>" );
+				JOptionPane.showMessageDialog( frame, "The port you entered is invalid" );
 			}
 		}
 

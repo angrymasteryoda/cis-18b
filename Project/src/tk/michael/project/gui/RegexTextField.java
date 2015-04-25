@@ -31,7 +31,12 @@ public class RegexTextField extends JTextField {
 	}
 
 	public boolean matches(){
-		Pattern pattern = Pattern.compile( this.regex );
-		return ( pattern.matcher( this.getText() ).matches() ? true : false );
+		if ( this.regex.equalsIgnoreCase( "notempty" ) ) {
+			return this.getText().length() > 0;
+		}
+		else {
+			Pattern pattern = Pattern.compile( this.regex );
+			return ( pattern.matcher( this.getText() ).matches() ? true : false );
+		}
 	}
 }
