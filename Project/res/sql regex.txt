@@ -1,0 +1,250 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~ commands ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+add
+all
+alter
+analyze
+as
+asc
+between
+by
+both
+case
+change
+check
+column
+constraint
+create
+cross
+databases
+day_hour
+day_minute
+day_second
+delayed
+delete
+desc
+describe
+sistinct
+distinctrow
+drop
+else
+enclosed
+escaped
+exists
+explain
+for
+foreign
+from
+fulltext
+grant
+group
+having
+high_priority
+hour_minute
+hour_second
+if
+ignore
+in
+index
+infile
+inner
+insert
+into
+is
+join
+key
+keys
+kill
+leading
+like
+limit
+load
+lock
+low_priority
+match
+minute_second
+natural
+on
+optimize
+option
+optionally
+order
+outer
+outfile
+primary
+procedure
+purge
+read
+references
+regexp
+rename
+replace
+require
+restrict
+revoke
+rlike
+select
+set
+show
+sql_big_result
+sql_small_result
+starting
+staight_join
+table
+terminated
+then
+to
+trailing
+union
+unique
+unlock
+update
+usage
+use
+using
+values
+when
+where
+with
+write
+year_month
+~~~~~~~~~~~~~~~~~~~~~~~~~ datatypes ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+bigint
+blob
+char
+character
+dec
+decimal
+double
+float
+float4
+float8
+int
+int1
+int2
+int3
+int4
+int8
+integer
+long
+longblob
+longtext
+mediumblob
+mediumint
+mediumtext
+middleint
+numeric
+real
+smallint
+tinyblob
+tinyint
+tinytext
+varbinary
+varchar
+~~~~~~~~~~~~~~~~~~~~~~~~~ where  search text ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+and
+not
+null
+or
+~~~~~~~~~~~~~~~~~~~~~~~~~ idk what these are called ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+binary
+default
+precision
+unsigned
+varying
+zerofill
+~~~~~~~~~~~~~~~~~~~~~~~~~ more idks ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+current_date
+current_time
+current_timestamp
+database
+interval
+left
+mod
+repeat
+right
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
+
+
+
+
+http://tohtml.com/mysql/
+
+text searched 
+
+ACCESSIBLE	ADD	ALL
+ALTER	ANALYZE	AND
+AS	ASC	ASENSITIVE
+BEFORE	BETWEEN	BIGINT
+BINARY	BLOB	BOTH
+BY	CALL	CASCADE
+CASE	CHANGE	CHAR
+CHARACTER	CHECK	COLLATE
+COLUMN	CONDITION	CONSTRAINT
+CONTINUE	CONVERT	CREATE
+CROSS	CURRENT_DATE	CURRENT_TIME
+CURRENT_TIMESTAMP	CURRENT_USER	CURSOR
+DATABASE	DATABASES	DAY_HOUR
+DAY_MICROSECOND	DAY_MINUTE	DAY_SECOND
+DEC	DECIMAL	DECLARE
+DEFAULT	DELAYED	DELETE
+DESC	DESCRIBE	DETERMINISTIC
+DISTINCT	DISTINCTROW	DIV
+DOUBLE	DROP	DUAL
+EACH	ELSE	ELSEIF
+ENCLOSED	ESCAPED	EXISTS
+EXIT	EXPLAIN	FALSE
+FETCH	FLOAT	FLOAT4
+FLOAT8	FOR	FORCE
+FOREIGN	FROM	FULLTEXT
+GENERAL[a]	GRANT	GROUP
+HAVING	HIGH_PRIORITY	HOUR_MICROSECOND
+HOUR_MINUTE	HOUR_SECOND	IF
+IGNORE	IGNORE_SERVER_IDS[b]	IN
+INDEX	INFILE	INNER
+INOUT	INSENSITIVE	INSERT
+INT	INT1	INT2
+INT3	INT4	INT8
+INTEGER	INTERVAL	INTO
+IS	ITERATE	JOIN
+KEY	KEYS	KILL
+LEADING	LEAVE	LEFT
+LIKE	LIMIT	LINEAR
+LINES	LOAD	LOCALTIME
+LOCALTIMESTAMP	LOCK	LONG
+LONGBLOB	LONGTEXT	LOOP
+LOW_PRIORITY	MASTER_HEARTBEAT_PERIOD[c]	MASTER_SSL_VERIFY_SERVER_CERT
+MATCH	MAXVALUE	MEDIUMBLOB
+MEDIUMINT	MEDIUMTEXT	MIDDLEINT
+MINUTE_MICROSECOND	MINUTE_SECOND	MOD
+MODIFIES	NATURAL	NOT
+NO_WRITE_TO_BINLOG	NULL	NUMERIC
+ON	OPTIMIZE	OPTION
+OPTIONALLY	OR	ORDER
+OUT	OUTER	OUTFILE
+PRECISION	PRIMARY	PROCEDURE
+PURGE	RANGE	READ
+READS	READ_WRITE	REAL
+REFERENCES	REGEXP	RELEASE
+RENAME	REPEAT	REPLACE
+REQUIRE	RESIGNAL	RESTRICT
+RETURN	REVOKE	RIGHT
+RLIKE	SCHEMA	SCHEMAS
+SECOND_MICROSECOND	SELECT	SENSITIVE
+SEPARATOR	SET	SHOW
+SIGNAL	SLOW[d]	SMALLINT
+SPATIAL	SPECIFIC	SQL
+SQLEXCEPTION	SQLSTATE	SQLWARNING
+SQL_BIG_RESULT	SQL_CALC_FOUND_ROWS	SQL_SMALL_RESULT
+SSL	STARTING	STRAIGHT_JOIN
+TABLE	TERMINATED	THEN
+TINYBLOB	TINYINT	TINYTEXT
+TO	TRAILING	TRIGGER
+TRUE	UNDO	UNION
+UNIQUE	UNLOCK	UNSIGNED
+UPDATE	USAGE	USE
+USING	UTC_DATE	UTC_TIME
+UTC_TIMESTAMP	VALUES	VARBINARY
+VARCHAR	VARCHARACTER	VARYING
+WHEN	WHERE	WHILE
+WITH	WRITE	XOR
+YEAR_MONTH	ZEROFILL

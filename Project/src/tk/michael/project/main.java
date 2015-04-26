@@ -5,6 +5,7 @@ import tk.michael.project.gui.DirectoryChooser;
 import tk.michael.project.gui.MainWindow;
 import tk.michael.project.util.DatabaseHandler;
 
+import javax.swing.*;
 import java.util.Arrays;
 
 /**
@@ -20,10 +21,17 @@ public class Main {
 		if ( Arrays.asList( args ).contains( "debugview".toLowerCase() ) ) {
 			debugView = true;
 		}
-		DatabaseHandler.load();
-//		new DirectoryChooser( "title" );
-		MainWindow.GetInstance().display();
-//		new AddDatabase().display();
+
+//		SwingUtilities.invokeLater( new Runnable() {
+//			public void run() {
+//				new TextPaneTest();
+//			}
+//		} );
+
+		new Test();
+
+//		DatabaseHandler.load();
+//		MainWindow.GetInstance().display();
 	}
 
 	public static boolean isDebugView() {
