@@ -11,12 +11,14 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/myApi-v1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/myApi.jar!/" />
         </CLASSES>
         <JAVADOC>
-          <root url="jar://$MODULE_DIR$/lib/myApi-v1-doc.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/myApi_javadoc.jar!/" />
         </JAVADOC>
-        <SOURCES />
+        <SOURCES>
+          <root url="jar://$MODULE_DIR$/lib/myApi_sources.jar!/" />
+        </SOURCES>
       </library>
     </orderEntry>
     <orderEntry type="module-library">

@@ -1,5 +1,7 @@
 package tk.michael.project.util;
 
+import com.michael.api.security.AES;
+
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -23,7 +25,11 @@ public class Database implements Serializable {
 		this.host = host;
 		this.port = port;
 		this.username = username;
-		this.password = password;
+		try {
+			this.password = AES.encrypt( password );
+		} catch ( Exception ex ){
+			ex.printStackTrace();
+		}
 		this.databaseName = databaseName;
 	}
 
@@ -52,11 +58,20 @@ public class Database implements Serializable {
 	}
 
 	public String getPassword() {
+		try {
+			this.password = AES.decrypt( password );
+		} catch ( Exception ex ){
+			ex.printStackTrace();
+		}
 		return password;
 	}
 
 	public void setPassword( String password ) {
-		this.password = password;
+		try {
+			this.password = AES.encrypt( password );
+		} catch ( Exception ex ){
+			ex.printStackTrace();
+		}
 	}
 
 	public String getPort() {
@@ -85,6 +100,6 @@ public class Database implements Serializable {
 
 	@Override
 	public String toString(){
-		return ( host + ":" + port + " -u " + username + " db" + databaseName );
+		return ( host + ":" + port + " -db" + databaseName + " -u " + username + " -p " + password );
 	}
 }

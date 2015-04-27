@@ -1,20 +1,12 @@
 package tk.michael.project.gui;
 
-import com.michael.api.IO.IO;
-import com.sun.corba.se.impl.protocol.NotLocalLocalCRDImpl;
-import com.sun.deploy.net.proxy.RemoveCommentReader;
 import net.miginfocom.swing.MigLayout;
 import tk.michael.project.Main;
 import tk.michael.project.util.Database;
 import tk.michael.project.util.DatabaseHandler;
 
-import javax.imageio.ImageIO;
-import javax.print.attribute.standard.RequestingUserName;
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.UUID;
@@ -46,6 +38,8 @@ public class DatabaseBox implements MouseListener{
 
 	public void init( String nameStr, String hostStr, String usernameStr ) {
 		panel = new JPanel( new MigLayout( "w 175px!, h 75px!" + ( Main.isDebugView() ? ",debug" : "" ) ) );
+
+		panel.addMouseListener( this );
 
 		name = new MLabel( nameStr );
 		host = new MLabel( hostStr );
@@ -94,6 +88,14 @@ public class DatabaseBox implements MouseListener{
 				}
 			} else {
 				return;
+			}
+		}
+
+		if ( e.getSource() == panel ) {
+			if ( e.getClickCount() == 2 ) {
+				//open to connected window
+				ConnectedWindow connectedWindow = new ConnectedWindow( id );
+				connectedWindow.display();
 			}
 		}
 	}

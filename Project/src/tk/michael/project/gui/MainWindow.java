@@ -144,7 +144,6 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 
 	@Override
 	public void componentResized( ComponentEvent e ) {
-		IO.println( dbPanel.getWidth() );
 		updateDatabase();
 	}
 

@@ -1,5 +1,6 @@
 package tk.michael.project;
 
+import com.michael.api.IO.IO;
 import tk.michael.project.gui.AddDatabase;
 import tk.michael.project.gui.DirectoryChooser;
 import tk.michael.project.gui.MainWindow;
@@ -22,16 +23,10 @@ public class Main {
 			debugView = true;
 		}
 
-//		SwingUtilities.invokeLater( new Runnable() {
-//			public void run() {
-//				new TextPaneTest();
-//			}
-//		} );
+//		new Test();
 
-		new Test();
-
-//		DatabaseHandler.load();
-//		MainWindow.GetInstance().display();
+		DatabaseHandler.load();
+		MainWindow.GetInstance().display();
 	}
 
 	public static boolean isDebugView() {
