@@ -100,6 +100,8 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 		JMenu database = new JMenu( "Database" );
 		file.setMnemonic( 'd' );
 		MenuHelper.createMenuItem( database, MenuHelper.PLAIN, "Add Database", "addDatabase", 0,"Add a database" );
+		MenuHelper.createMenuItem( database, MenuHelper.PLAIN, "Open Database", "openDatabase", 0,"Open a database" );
+		MenuHelper.createMenuItem( database, MenuHelper.PLAIN, "Remove Database", "rmDatabase", 0,"Remove a database" );
 		MenuHelper.createMenuItem( database, MenuHelper.PLAIN, "Remove All Databases", "rmAllDbs", 0,"Remove all databases" );
 
 		menuBar.add( file );

@@ -2,6 +2,7 @@ package tk.michael.project;
 
 import com.michael.api.IO.IO;
 import tk.michael.project.gui.AddDatabase;
+import tk.michael.project.gui.ConnectedWindow;
 import tk.michael.project.gui.DirectoryChooser;
 import tk.michael.project.gui.MainWindow;
 import tk.michael.project.util.DatabaseHandler;
@@ -25,7 +26,11 @@ public class Main {
 
 //		new Test();
 
+//		new TreeExample();
+
 		DatabaseHandler.load();
+//		ConnectedWindow cw = new ConnectedWindow( DatabaseHandler.getDatabases().get( 0 ).getId() );
+//		cw.display();
 		MainWindow.GetInstance().display();
 	}
 

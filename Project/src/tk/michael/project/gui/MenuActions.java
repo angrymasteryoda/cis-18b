@@ -1,12 +1,16 @@
 package tk.michael.project.gui;
 
 import com.michael.api.IO.IO;
+import tk.michael.project.util.Database;
 import tk.michael.project.util.DatabaseHandler;
+import tk.michael.project.util.Util;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Created By: Michael Risher
@@ -35,8 +39,7 @@ public class MenuActions implements ActionListener {
 				if ( file.isDirectory() ) {
 					DatabaseHandler.setOutFileDir( file.toString() );
 					DatabaseHandler.serialize();
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog( null, "Not a valid directory to choose from!" );
 				}
 			}
@@ -50,8 +53,7 @@ public class MenuActions implements ActionListener {
 					DatabaseHandler.setOutFileDir( file.toString() );
 					DatabaseHandler.load();
 					MainWindow.GetInstance().updateDatabase();
-				}
-				else {
+				} else {
 					JOptionPane.showMessageDialog( null, "Not a valid directory to choose from!" );
 				}
 			}
@@ -63,6 +65,90 @@ public class MenuActions implements ActionListener {
 				DatabaseHandler.deleteAllDatabases();
 			}
 		}
-		IO.println( "menu action: "  + ( action.isEmpty() ? "" : action ) );
+
+		if ( action.equals( "openDatabase" ) ) {
+			ArrayList<Database> dbs = DatabaseHandler.getDatabases();
+			UUID[] uuids = new UUID[ dbs.size() ];
+			String[] names = new String[ dbs.size() ];
+
+			for ( int i = 0; i < dbs.size(); i++ ) {
+				uuids[ i ] = dbs.get( i ).getId();
+				names[ i ] = dbs.get( i ).getName();
+			}
+
+			int[] duplicates = Util.getDuplicatesFromStrings( names );
+
+			for ( int i = 0; i < duplicates.length; i++ ) {
+				names[ duplicates[ i ] ] += appendSpaces( duplicates[ i ] );
+			}
+
+			String input = (String) JOptionPane.showInputDialog( null, "Select a database to open.",
+				"Delete a Database", JOptionPane.PLAIN_MESSAGE, null, names, names[ 0 ] );
+
+			//If a string was returned, say so.
+			if ( ( input != null ) && ( input.length() > 0 ) ) {
+				int id = -1;
+				for ( int i = 0; i < names.length; i++ ) {
+					if ( input.equals( names[ i ] ) ) {
+						id = i;
+						break;
+					}
+				}
+				if ( id != -1 ) {
+					ConnectedWindow cw = new ConnectedWindow( uuids[id] );
+					cw.display();
+				}
+			}
+		}
+
+		if ( action.equals( "rmDatabase" ) ) {
+			ArrayList<Database> dbs = DatabaseHandler.getDatabases();
+			UUID[] uuids = new UUID[ dbs.size() ];
+			String[] names = new String[ dbs.size() ];
+
+			for ( int i = 0; i < dbs.size(); i++ ) {
+				uuids[ i ] = dbs.get( i ).getId();
+				names[ i ] = dbs.get( i ).getName();
+			}
+
+			int[] duplicates = Util.getDuplicatesFromStrings( names );
+
+			for ( int i = 0; i < duplicates.length; i++ ) {
+				names[ duplicates[ i ] ] += appendSpaces( duplicates[ i ] );
+			}
+
+			String input = (String) JOptionPane.showInputDialog( null, "Select a database to delete.\nThis can not be undone.",
+				"Delete a Database", JOptionPane.PLAIN_MESSAGE, null, names, names[ 0 ] );
+
+			//If a string was returned, say so.
+			if ( ( input != null ) && ( input.length() > 0 ) ) {
+				int id = -1;
+				for ( int i = 0; i < names.length; i++ ) {
+					if ( input.equals( names[ i ] ) ) {
+						id = i;
+						break;
+					}
+				}
+				if ( id != -1 ) {
+					DatabaseHandler.deleteDatabase( uuids[id] );
+				}
+			}
+		}
+
+		IO.println( "menu action: " + ( action.isEmpty() ? "" : action ) );
+	}
+
+	/**
+	 * bug fix for duplicates
+	 *
+	 * @param amt int
+	 * @return string to append
+	 */
+	private String appendSpaces( int amt ) {
+		String s = "";
+		for ( int i = 0; i < amt; i++ ) {
+			s += " ";
+		}
+		return s;
 	}
 }
