@@ -16,7 +16,7 @@ public class ConnectedDb {
 	public static boolean testConnection( String url, String username, String password ){
 		try {
 			Connection connection = DriverManager.getConnection( url, username, password );
-			return connection.isValid( 10 );
+			return connection.isValid( 5 );
 		} catch ( SQLException e ) {
 			return false;
 		}

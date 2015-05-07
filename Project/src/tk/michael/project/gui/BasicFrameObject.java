@@ -19,8 +19,8 @@ public abstract class BasicFrameObject {
 		frame = new JFrame( title );
 	}
 
-	abstract void init();
-	abstract void initMenu();
+	protected abstract void init();
+	protected abstract void initMenu();
 
 	public void display(){
 		frame.setVisible( true );

@@ -34,7 +34,6 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 		super( "Database Workbench" );
 		init();
 		instance = this;
-		IO.println( dbPanel.getWidth() );
 	}
 
 	public static MainWindow GetInstance(){
