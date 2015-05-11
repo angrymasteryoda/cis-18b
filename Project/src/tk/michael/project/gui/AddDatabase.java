@@ -6,8 +6,10 @@ import tk.michael.project.connecter.*;
 import tk.michael.project.util.DatabaseHandler;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -19,6 +21,9 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 
 	private HashMap< String, RegexTextField > textFields = new HashMap<>();
 	private HashMap< String, MLabel > labels = new HashMap<>();
+	private ArrayList<Component> order = new ArrayList<>();
+	private FocusPolicy focus;
+	private JPasswordField password;
 
 	public AddDatabase() {
 		super( "Add Database" );
@@ -26,7 +31,7 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 	}
 
 	@Override
-	void init() {
+	protected void init() {
 		JPanel panel = new JPanel( new MigLayout(  ) );
 
 		labels.put( "name", new MLabel( "Name:" ) );
@@ -42,7 +47,7 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 		textFields.put( "user", new RegexTextField( 20, "notempty"  ) );
 
 		labels.put( "pass", new MLabel( "Password:" ) );
-		textFields.put( "pass", new RegexTextField( 20, null ) );
+		password = new JPasswordField( 20 );
 
 		labels.put( "database", new MLabel( "Database:" ) );
 		textFields.put( "database", new RegexTextField( 20, null ) );
@@ -69,7 +74,7 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 		panel.add( labels.get( "user" ) );
 		panel.add( textFields.get( "user" ), "wrap" );
 		panel.add( labels.get( "pass" ) );
-		panel.add( textFields.get( "pass" ), "wrap" );
+		panel.add( password, "wrap" );
 		panel.add( labels.get( "database" ), "gaptop 20px" );
 		panel.add( textFields.get( "database" ), "wrap" );
 
@@ -77,14 +82,26 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 		panel.add( cancel, "" );
 		panel.add( testConnection, "wrap" );
 
+		//focus order
+		order.add( textFields.get( "name" ) );
+		order.add( textFields.get( "host" ) );
+		order.add( textFields.get( "user" ) );
+		order.add( password );
+		order.add( textFields.get( "database" ) );
+		order.add( confirm );
+		order.add( cancel );
+		order.add( testConnection );
+
+
 		frame.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
+		frame.setFocusTraversalPolicy( new FocusPolicy( order ) );
 		frame.add( panel );
 		frame.pack();
 		frame.setLocationRelativeTo( null );
 	}
 
 	@Override
-	void initMenu() {
+	protected void initMenu() {
 		//no menus here
 	}
 
@@ -119,7 +136,7 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 					textFields.get( "host" ).getText(),
 					textFields.get( "port" ).getText(),
 					textFields.get( "user" ).getText(),
-					textFields.get( "pass" ).getText(),
+					password.getText(),
 					textFields.get(  "database" ).getText()
 				);
 				frame.dispose();
@@ -140,7 +157,7 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 				textFields.get(  "database" ).getText()
 			);
 
-			boolean state = ConnectedDb.testConnection( db.getUrl(), db.getUsername(), db.getPassword() );
+			boolean state = MysqlDatabase.testConnection( db.getUrl(), db.getUsername(), db.getPassword() );
 			String message = "Connected successfully!";
 			if ( !state ) {
 				message = "Unable to connect.";

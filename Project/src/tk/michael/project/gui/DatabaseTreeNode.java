@@ -18,9 +18,11 @@ public class DatabaseTreeNode extends DefaultMutableTreeNode {
 	private Database database;
 	private DefaultMutableTreeNode tableNode;
 	private ArrayList<DefaultMutableTreeNode> tables;
+	private final String dbName;
 
 	public DatabaseTreeNode( Object userObject, Database db ) {
 		super( userObject );
+		this.dbName = (String) userObject;
 		this.database = db;
 
 		tables = new ArrayList<>();
@@ -37,6 +39,7 @@ public class DatabaseTreeNode extends DefaultMutableTreeNode {
 		db.open();
 		Statement statement = null;
 		try {
+			db.getConnection().setCatalog( dbName );
 			statement = db.getConnection().createStatement();
 			ResultSet res = statement.executeQuery( "SHOW TABLES" );
 			while ( res.next() ){

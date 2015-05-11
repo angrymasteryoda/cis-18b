@@ -1,5 +1,6 @@
 package tk.michael.project.gui;
 
+import com.michael.api.IO.IO;
 import net.miginfocom.swing.MigLayout;
 import tk.michael.project.Main;
 import tk.michael.project.connecter.MysqlDatabase;
@@ -8,9 +9,14 @@ import tk.michael.project.util.DatabaseHandler;
 import tk.michael.project.util.SyntaxRegex;
 
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,11 +28,16 @@ import java.util.UUID;
  * Date: 4/27/15
  * Time: 3:56 AM
  */
-public class ConnectedWindow extends BasicFrameObject {
+public class ConnectedWindow extends BasicFrameObject implements ActionListener {
 	private final UUID dbId;
 	private Database database;
+
 	private JTree navTree;
+	private DefaultMutableTreeNode selectedNode;
+	private JPopupMenu navPopupMenu;
+
 	private JTextPane textPane;
+
 
 	public ConnectedWindow( UUID dbId ) {
 		super();
@@ -34,6 +45,18 @@ public class ConnectedWindow extends BasicFrameObject {
 		this.database = DatabaseHandler.getDabase( dbId );
 		frame.setTitle( "Connected to " + this.database.getName() + " as " + this.database.getUsername() );
 		init();
+	}
+
+	@Override
+	public void display(){
+		//test we can connect first
+		if ( MysqlDatabase.testConnection( this.database ) ) {
+			frame.setVisible( true );
+		} else {
+			JOptionPane.showOptionDialog( null, "Unable to open database.\nMake sure the information you provided is correct and you are connected to the internet",
+				"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null );
+
+		}
 	}
 
 	@Override
@@ -55,23 +78,41 @@ public class ConnectedWindow extends BasicFrameObject {
 
 	@Override
 	protected void initMenu() {
+		JMenuBar menuBar = new JMenuBar();
+		JMenu file = new JMenu( "File" );
+		file.setMnemonic( 'F' );
+
+		MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Load", "loadDbs", 'L', "Load from custom location" );
+		MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Set Save Location", "saveLoc", 0, "Sets the default save location" );
+		MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Exit", "exitApp", 'X', "Close the application" );
+
+		JMenu database = new JMenu( "Database" );
+		file.setMnemonic( 'd' );
+		MenuHelper.createMenuItem( database, MenuHelper.PLAIN, "Open Database", "openDatabase", 0,"Open a database" );
+		MenuHelper.createMenuItemCustomAction( database, MenuHelper.PLAIN, "Close Database", "closeDatabase", 0, "Close current connection", this );
+
+		menuBar.add( file );
+		menuBar.add( database );
+		frame.setJMenuBar( menuBar );
 	}
 
 	private void initNavTree(){
+		initTreePopUpMenu();
 		ArrayList<String> databases = new ArrayList<>();
 		MysqlDatabase db = new MysqlDatabase( this.database );
-		db.open();
-		Statement statement = null;
-		try {
-			statement = db.getConnection().createStatement();
-			ResultSet res = statement.executeQuery( "SHOW DATABASES" );
-			while ( res.next() ){
-				databases.add( res.getString( 1 ) );
+		if( db.open() ) {
+			Statement statement = null;
+			try {
+				statement = db.getConnection().createStatement();
+				ResultSet res = statement.executeQuery( "SHOW DATABASES" );
+				while ( res.next() ){
+					databases.add( res.getString( 1 ) );
+				}
+			} catch ( SQLException e ) {
+				e.printStackTrace();
 			}
-		} catch ( SQLException e ) {
-			e.printStackTrace();
+			db.close();
 		}
-		db.close();
 
 
 
@@ -91,7 +132,33 @@ public class ConnectedWindow extends BasicFrameObject {
 		//create the tree by passing in the root node
 		navTree = new JTree( root );
 
+		ImageIcon imageIcon = new ImageIcon( this.getClass().getResource( "/database.png" ) );
+		DefaultTreeCellRenderer renderer = new DefaultTreeCellRenderer();
+		renderer.setLeafIcon( imageIcon );
+
+		navTree.setCellRenderer( renderer );
+
+		//set right click menu
+		navTree.setComponentPopupMenu( navPopupMenu );
+
+		//set selection action
+		navTree.getSelectionModel().addTreeSelectionListener( new TreeSelectionListener() {
+			@Override
+			public void valueChanged( TreeSelectionEvent e ) {
+				selectedNode = (DefaultMutableTreeNode) navTree.getLastSelectedPathComponent();
+				IO.println( selectedNode.getUserObject().toString() );
+			}
+		} );
+
 		navTree.setRootVisible(false);
+	}
+
+	private void initTreePopUpMenu(){
+		navPopupMenu = new JPopupMenu();
+		JMenuItem item = new JMenuItem( "Select * From" );
+		item.setActionCommand( "treeSelect" );
+		item.addActionListener( this );
+		navPopupMenu.add( item );
 	}
 
 	private void initSyntaxEditor() {
@@ -181,5 +248,13 @@ public class ConnectedWindow extends BasicFrameObject {
 			index++;
 		}
 		return index;
+	}
+
+	@Override
+	public void actionPerformed( ActionEvent e ) {
+		String action = e.getActionCommand();
+		if ( action.equals( "closeDatabase" ) ) {
+			this.frame.dispose();
+		}
 	}
 }

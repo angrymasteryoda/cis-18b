@@ -1,13 +1,15 @@
 package tk.michael.project.gui;
 
 import net.miginfocom.swing.MigLayout;
-import tk.michael.project.connecter.ConnectedDb;
+import tk.michael.project.connecter.MysqlDatabase;
 import tk.michael.project.util.Database;
 import tk.michael.project.util.DatabaseHandler;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -20,6 +22,9 @@ public class EditDatabase extends BasicFrameObject implements ActionListener {
 	private HashMap< String, RegexTextField > textFields = new HashMap<>();
 	private HashMap< String, MLabel > labels = new HashMap<>();
 	private Database db;
+	private ArrayList<Component> order = new ArrayList<>();
+	private FocusPolicy focus;
+	private JPasswordField password;
 
 	public EditDatabase( Database db ) {
 		super( "Editing "  + db.getName() );
@@ -28,7 +33,7 @@ public class EditDatabase extends BasicFrameObject implements ActionListener {
 	}
 
 	@Override
-	void init() {
+	protected void init() {
 		JPanel panel = new JPanel( new MigLayout(  ) );
 
 		labels.put( "name", new MLabel( "Name:" ) );
@@ -44,7 +49,7 @@ public class EditDatabase extends BasicFrameObject implements ActionListener {
 		textFields.put( "user", new RegexTextField( db.getUsername(), 20, "notempty" ) );
 
 		labels.put( "pass", new MLabel( "Password:" ) );
-		textFields.put( "pass", new RegexTextField( db.getPassword(), 20, null ) );
+		password = new JPasswordField( db.getPassword(), 20 );
 
 		labels.put( "database", new MLabel( "Database:" ) );
 		textFields.put( "database", new RegexTextField( db.getDatabaseName(), 20, null ) );
@@ -71,7 +76,7 @@ public class EditDatabase extends BasicFrameObject implements ActionListener {
 		panel.add( labels.get( "user" ) );
 		panel.add( textFields.get( "user" ), "wrap" );
 		panel.add( labels.get( "pass" ) );
-		panel.add( textFields.get( "pass" ), "wrap" );
+		panel.add( password, "wrap" );
 		panel.add( labels.get( "database" ), "gaptop 20px" );
 		panel.add( textFields.get( "database" ), "wrap" );
 
@@ -79,14 +84,25 @@ public class EditDatabase extends BasicFrameObject implements ActionListener {
 		panel.add( cancel, "" );
 		panel.add( testConnection, "wrap" );
 
+		//focus order
+		order.add( textFields.get( "name" ) );
+		order.add( textFields.get( "host" ) );
+		order.add( textFields.get( "user" ) );
+		order.add( password );
+		order.add( textFields.get( "database" ) );
+		order.add( confirm );
+		order.add( cancel );
+		order.add( testConnection );
+
 		frame.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
+		frame.setFocusTraversalPolicy( new FocusPolicy( order ) );
 		frame.add( panel );
 		frame.pack();
 		frame.setLocationRelativeTo( null );
 	}
 
 	@Override
-	void initMenu() {
+	protected void initMenu() {
 		//no menus
 	}
 
@@ -142,7 +158,7 @@ public class EditDatabase extends BasicFrameObject implements ActionListener {
 				textFields.get(  "database" ).getText()
 			);
 
-			boolean state = ConnectedDb.testConnection( db.getUrl(), db.getUsername(), db.getPassword() );
+			boolean state = MysqlDatabase.testConnection( db.getUrl(), db.getUsername(), db.getPassword() );
 			String message = "Connected successfully!";
 			if ( !state ) {
 				message = "Unable to connect.";

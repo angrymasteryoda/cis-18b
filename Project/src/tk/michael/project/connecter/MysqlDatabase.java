@@ -1,5 +1,6 @@
 package tk.michael.project.connecter;
 
+import com.michael.api.IO.IO;
 import com.michael.api.security.AES;
 import tk.michael.project.util.Database;
 
@@ -65,6 +66,36 @@ public class MysqlDatabase {
 	}
 
 	/**
+	 * Test if the connection is valid
+	 * @param url url for database
+	 * @param username username for database
+	 * @param password password for database
+	 * @return true if successful
+	 */
+	public static boolean testConnection( String url, String username, String password ){
+		try {
+			Connection connection = DriverManager.getConnection( url, username, password );
+			return connection.isValid( 5 );
+		} catch ( SQLException e ) {
+			return false;
+		}
+	}
+
+	/**
+	 * Tet if the connection is valid
+	 * @param db Database onject
+	 * @return true if successful
+	 */
+	public static boolean testConnection( Database db ){
+		try {
+			Connection connection = DriverManager.getConnection( db.getUrl(), db.getUsername(), db.getPassword() );
+			return connection.isValid( 5 );
+		} catch ( SQLException e ) {
+			return false;
+		}
+	}
+
+	/**
 	 * open the connection
 	 * @return true if connected
 	 */
@@ -78,6 +109,7 @@ public class MysqlDatabase {
 				//todo log stuff
 			}
 		} catch ( SQLException e ){
+			IO.println( "Failed to open connection" );
 			e.printStackTrace();
 		}
 

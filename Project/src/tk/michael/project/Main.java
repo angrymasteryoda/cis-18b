@@ -24,11 +24,6 @@ public class Main {
 		if ( Arrays.asList( args ).contains( "debugview".toLowerCase() ) ) {
 			debugView = true;
 		}
-
-//		new Test();
-
-//		new TreeExample();
-
 		try {
 			for ( UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels() ){
 				if ( "Nimbus".equals( info.getName() ) ) {
@@ -37,14 +32,16 @@ public class Main {
 				}
 			}
 		}
-		catch ( Exception e) {
-			// handle exception
-		}
+		catch ( Exception e) { }
+
+//		new Test().setVisible(true);
 
 		DatabaseHandler.load();
 //		ConnectedWindow cw = new ConnectedWindow( DatabaseHandler.getDatabases().get( 0 ).getId() );
 //		cw.display();
 		MainWindow.GetInstance().display();
+
+//		new TreeMenu();
 	}
 
 	public static boolean isDebugView() {
