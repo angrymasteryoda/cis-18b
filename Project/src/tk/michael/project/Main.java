@@ -1,6 +1,7 @@
 package tk.michael.project;
 
 import com.michael.api.IO.IO;
+import com.michael.api.security.AES;
 import tk.michael.project.gui.AddDatabase;
 import tk.michael.project.gui.ConnectedWindow;
 import tk.michael.project.gui.DirectoryChooser;
@@ -19,19 +20,28 @@ public class Main {
 
 	private static boolean debugView  = false;
 
-	public static void main( String[] args ){
+	public static void main( String[] args ) throws Exception{
 		if ( Arrays.asList( args ).contains( "debugview".toLowerCase() ) ) {
 			debugView = true;
 		}
+		try {
+			for ( UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels() ){
+				if ( "Nimbus".equals( info.getName() ) ) {
+					UIManager.setLookAndFeel( info.getClassName() );
+					break;
+				}
+			}
+		}
+		catch ( Exception e) { }
 
-//		new Test();
-
-//		new TreeExample();
+//		new Test().setVisible(true);
 
 		DatabaseHandler.load();
 //		ConnectedWindow cw = new ConnectedWindow( DatabaseHandler.getDatabases().get( 0 ).getId() );
 //		cw.display();
 		MainWindow.GetInstance().display();
+
+//		new TreeMenu();
 	}
 
 	public static boolean isDebugView() {

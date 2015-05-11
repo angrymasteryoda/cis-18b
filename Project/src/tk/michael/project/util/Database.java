@@ -58,8 +58,9 @@ public class Database implements Serializable {
 	}
 
 	public String getPassword() {
+		String password = "";
 		try {
-			this.password = AES.decrypt( password );
+			password = AES.decrypt( this.password );
 		} catch ( Exception ex ){
 			ex.printStackTrace();
 		}

@@ -2,6 +2,7 @@ package tk.michael.project.gui;
 
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 /**
  * Created By: Michael Risher
@@ -54,6 +55,51 @@ public class MenuHelper{
 
 		item.setActionCommand( command );
 		item.addActionListener( new MenuActions() );
+
+		menu.add( item );
+		return item;
+	}
+
+	public static JMenuItem createMenuItemCustomAction( JMenu menu, int type, String text, String command, int acceleratorKey, ActionListener action ){
+		return createMenuItemCustomAction( menu, type, text, command, null, acceleratorKey, null, action );
+	}
+
+	public static JMenuItem createMenuItemCustomAction( JMenu menu, int type, String text, String command, int acceleratorKey, String toolTip,
+	                                                    ActionListener action ){
+		return createMenuItemCustomAction( menu, type, text, command, null, acceleratorKey, toolTip, action );
+	}
+
+	public static JMenuItem createMenuItemCustomAction( JMenu menu, int type, String text, String command, ImageIcon image, int acceleratorKey,
+	                                                    String toolTip, ActionListener action ){
+		JMenuItem item;
+
+		switch ( type ) {
+			case RADIO:
+				item = new JRadioButtonMenuItem();
+				break;
+			case CHECK:
+				item = new JCheckBoxMenuItem();
+				break;
+			default:
+				item = new JMenuItem();
+		}
+
+		item.setText( text );
+
+		if ( image != null ) {
+			item.setIcon( image );
+		}
+
+		if ( acceleratorKey > 0 ) {
+			item.setMnemonic( acceleratorKey );
+		}
+
+		if ( toolTip != null ) {
+			item.setToolTipText( toolTip );
+		}
+
+		item.setActionCommand( command );
+		item.addActionListener( action );
 
 		menu.add( item );
 		return item;
