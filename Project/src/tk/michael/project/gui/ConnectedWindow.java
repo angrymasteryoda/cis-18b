@@ -3,7 +3,7 @@ package tk.michael.project.gui;
 import com.michael.api.IO.IO;
 import net.miginfocom.swing.MigLayout;
 import tk.michael.project.Main;
-import tk.michael.project.connecter.MysqlDatabase;
+import tk.michael.project.db.MysqlDatabase;
 import tk.michael.project.util.Database;
 import tk.michael.project.util.DatabaseHandler;
 import tk.michael.project.util.SyntaxRegex;
@@ -42,7 +42,7 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 	public ConnectedWindow( UUID dbId ) {
 		super();
 		this.dbId = dbId;
-		this.database = DatabaseHandler.getDabase( dbId );
+		this.database = DatabaseHandler.getDatabase( dbId );
 		frame.setTitle( "Connected to " + this.database.getName() + " as " + this.database.getUsername() );
 		init();
 	}

@@ -2,7 +2,7 @@ package tk.michael.project.gui;
 
 import net.miginfocom.swing.MigLayout;
 import tk.michael.project.util.Database;
-import tk.michael.project.connecter.*;
+import tk.michael.project.db.*;
 import tk.michael.project.util.DatabaseHandler;
 
 import javax.swing.*;

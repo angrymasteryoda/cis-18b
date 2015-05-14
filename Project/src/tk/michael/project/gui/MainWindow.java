@@ -26,6 +26,11 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 
 	private static MainWindow instance = null;
 	private JPanel dbPanel;
+	private JLabel addLabel;
+	private JLabel loginLabel;
+	private JLabel loginLabelText;
+	private ImageIcon loginIcon = new ImageIcon( getClass().getResource( "/login.png" ) );
+	private ImageIcon logoutIcon = new ImageIcon( getClass().getResource( "/logout.png" ) );
 	private ArrayList<DatabaseBox> databaseBoxes = new ArrayList<>();
 
 	private int dbWidth = 738; // starting db width
@@ -61,7 +66,7 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 		topPanel.setBackground( new Color( 0x222222 ) );
 		JLabel info = new JLabel( "Your Mysql Servers" );
 		info.setForeground( Color.WHITE );
-		JLabel addLabel = new JLabel( new ImageIcon( getClass().getResource( "/addDatabase.png" ) ) );
+		addLabel = new JLabel( new ImageIcon( getClass().getResource( "/addDatabase.png" ) ) );
 		addLabel.setToolTipText( "Add Database" );
 		addLabel.addMouseListener( this );
 		addLabel.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
@@ -71,21 +76,32 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 
 		frame.add( topPanel, BorderLayout.NORTH );
 
+		//db panel
 		dbPanel = new JPanel( new MigLayout( width + ", h 600px" + ( Main.isDebugView() ? ",debug" : "" ) ) );
 		dbPanel.setBackground( new Color( 0x777777 ) );
-
-//		JPanel databox = new DatabaseBox( UUID.randomUUID(), "local mysql", "localhost", "root"  ).getPanel();
-
-//		dbPanel.add( databox, BorderLayout.CENTER );
-
 		updateDatabase();
-
 		frame.add( dbPanel, BorderLayout.CENTER );
+
+		//
+		JPanel loginPanel = new JPanel( new MigLayout( width + ", h 35px!" + ( Main.isDebugView() ? ",debug" : "" ) ) );
+		loginPanel.setBackground( new Color( 0x222222 ) );
+		loginLabelText = new JLabel( "Log into the cloud" );
+		loginLabelText.setForeground( Color.WHITE );
+		loginLabel = new JLabel( loginIcon );
+		loginLabel.setToolTipText( "Log into the cloud" );
+		loginLabel.addMouseListener( this );
+		loginLabel.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+
+		loginPanel.add( loginLabel, "dock west, w 40!, pad 5 0 5 0" );
+		loginPanel.add( loginLabelText, "dock west, pad 5 15 5 0, w 150! " );
+
+		frame.add( loginPanel, BorderLayout.SOUTH );
 
 		frame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
 		frame.pack();
 		frame.setLocationRelativeTo( null );
 	}
+
 
 	public void initMenu(){
 		JMenuBar menuBar = new JMenuBar();
@@ -126,9 +142,38 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 	}
 //184.5
 
+	public void login( boolean state ){
+		if ( state ) {
+			//we logged in
+			loginLabelText.setText( "Logged in as, " + Main.getLoginSession().getUsername() );
+			loginLabel.setIcon( logoutIcon );
+			loginLabel.setToolTipText( "Log out" );
+		} else{
+			loginLabelText.setText( "Log into the cloud"  );
+			loginLabel.setIcon( loginIcon );
+			loginLabel.setToolTipText( "Log into the cloud" );
+		}
+	}
+
 	@Override
 	public void mouseClicked( MouseEvent e ) {
-		new AddDatabase().display();
+			if ( e.getSource().equals( addLabel ) ) {
+			new AddDatabase().display();
+		}
+
+		if ( e.getSource().equals( loginLabel ) ) {
+			if ( Main.isLoggedIn() ) {
+				int choice = JOptionPane.showConfirmDialog( null, "Are you sure you want to sign out?", "Logout?", JOptionPane.YES_NO_OPTION );
+
+				if ( choice == JOptionPane.YES_OPTION ) {
+					Main.logout();
+				} else {
+					return;
+				}
+			} else{
+				new LoginDialog( frame, "Login" ).display();
+			}
+		}
 	}
 
 	@Override

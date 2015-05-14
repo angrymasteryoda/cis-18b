@@ -16,7 +16,7 @@ public class Database implements Serializable {
 	private String host;
 	private String port;
 	private String username;
-	private String password; //todo encrypt this
+	private String password;
 	private String databaseName;
 
 	public Database( String name, String host, String port, String username, String password, String databaseName ) {
@@ -102,5 +102,15 @@ public class Database implements Serializable {
 	@Override
 	public String toString(){
 		return ( host + ":" + port + " -db" + databaseName + " -u " + username + " -p " + password );
+	}
+
+	public String toDbString(){
+		return ( name + "|" +
+			host + "|" +
+			port + "|" +
+			username + "|" +
+			password + "|" +
+			databaseName
+		);
 	}
 }

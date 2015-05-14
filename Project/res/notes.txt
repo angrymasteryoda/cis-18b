@@ -1,0 +1,2 @@
+how to use sockets?
+maybe a auto updater

@@ -38,7 +38,7 @@ public class MenuActions implements ActionListener {
 			if ( ( file = dc.display() ) != null ) {
 				if ( file.isDirectory() ) {
 					DatabaseHandler.setOutFileDir( file.toString() );
-					DatabaseHandler.serialize();
+					DatabaseHandler.save();
 				} else {
 					JOptionPane.showMessageDialog( null, "Not a valid directory to choose from!" );
 				}

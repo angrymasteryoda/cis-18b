@@ -1,4 +1,4 @@
-package tk.michael.project.connecter;
+package tk.michael.project.db;
 
 import com.michael.api.IO.IO;
 import com.michael.api.security.AES;
@@ -51,14 +51,14 @@ public class MysqlDatabase {
 	public MysqlDatabase() {
 		try{
 			Properties props = new Properties(  );
-			props.load( this.getClass().getResourceAsStream( "database.props" ) );
+			props.load( this.getClass().getResourceAsStream( "/database.props" ) );
 			String mode = props.getProperty( "mode", "local" );
-			this.url = props.getProperty( "db." + mode + "url" );
-			this.user = props.getProperty( "db." + mode + "user" );
+			this.url = props.getProperty( "db." + mode + ".url" );
+			this.user = props.getProperty( "db." + mode + ".user" );
 			try {
-				this.password = AES.decrypt( props.getProperty( "db." + mode + "password" ) );
+				this.password = AES.decrypt( props.getProperty( "db." + mode + ".password" ) );
 			} catch ( Exception e ){
-				this.password = props.getProperty( "db." + mode + "password" );
+				this.password = props.getProperty( "db." + mode + ".password" );
 			}
 		} catch( IOException e ){
 			e.printStackTrace();
@@ -221,6 +221,40 @@ public class MysqlDatabase {
 			}
 		}
 		return false;
+	}
+
+	/**
+	 * Count the amount of expected rows returned from a MySQL query
+	 * <p/>
+	 * This function should only be called before you run a query where you will need to know
+	 * the specific amount of rows being returned or to check if simple
+	 * information exists in the database already, such as a username.
+	 * <p/>
+	 * This function is a platform and environment independent solution but can be expensive on large queries.
+	 *
+	 * @param table The table to look at in the database. If this is the only parameter it will count all rows in the table.
+	 * @param par   This string is used as the SQL's WHERE clause. Format is: "color = '"+colorAnswer+"' AND age = '"+userAge+"'"
+	 * @return
+	 */
+	public int numRows( String table, String par ) {
+		if ( isConnected == true ) {
+			try {
+				if ( par.length() <= 0 ) {
+					preparedStatement = connection.prepareStatement( "SELECT COUNT(*) FROM " + table );
+				} else {
+					preparedStatement = connection.prepareStatement( "SELECT COUNT(*) FROM " + table + " WHERE " + par );
+				}
+				resultSet = preparedStatement.executeQuery();
+				resultSet.first();
+				return resultSet.getInt( 1 );
+			} catch ( SQLException ex ) {
+				System.out.println( "MySQL Error: [Severe] " + ex );
+			}
+		} else {
+			System.out.println( "MySQL Error: Can not count rows, no database connection." );
+			return 0;
+		}
+		return 0;
 	}
 
 	public Connection getConnection() {

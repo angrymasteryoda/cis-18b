@@ -1,6 +1,6 @@
 package tk.michael.project.gui;
 
-import tk.michael.project.connecter.MysqlDatabase;
+import tk.michael.project.db.MysqlDatabase;
 import tk.michael.project.util.Database;
 
 import javax.swing.tree.DefaultMutableTreeNode;

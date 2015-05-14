@@ -1,7 +1,7 @@
 package tk.michael.project.gui;
 
 import net.miginfocom.swing.MigLayout;
-import tk.michael.project.connecter.MysqlDatabase;
+import tk.michael.project.db.MysqlDatabase;
 import tk.michael.project.util.Database;
 import tk.michael.project.util.DatabaseHandler;
 

@@ -1,4 +1,7 @@
-mode=local
-db.local.url=jdbc:mysql://localhost:3306/
+mode=live
+db.local.url=jdbc:mysql://localhost:3306/cis18b
 db.local.user=root
 db.local.password=78dIHEN/0m8R/bXsb+iZsQ==
+db.live.url=jdbc:mysql://209.129.8.4:3306/42029
+db.live.user=42029
+db.live.password=CtKGQb9v5W1TlaVP3fTGYA==

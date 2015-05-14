@@ -7,6 +7,7 @@ import tk.michael.project.gui.ConnectedWindow;
 import tk.michael.project.gui.DirectoryChooser;
 import tk.michael.project.gui.MainWindow;
 import tk.michael.project.util.DatabaseHandler;
+import tk.michael.project.util.Session;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -17,6 +18,9 @@ import java.util.Arrays;
  * Time: 4:02 PM
  */
 public class Main {
+
+	private static Session loginSession;
+	private static boolean isLoggedIn = false;
 
 	private static boolean debugView  = false;
 
@@ -34,17 +38,42 @@ public class Main {
 		}
 		catch ( Exception e) { }
 
-//		new Test().setVisible(true);
-
 		DatabaseHandler.load();
+		Session.load();
 //		ConnectedWindow cw = new ConnectedWindow( DatabaseHandler.getDatabases().get( 0 ).getId() );
 //		cw.display();
 		MainWindow.GetInstance().display();
 
-//		new TreeMenu();
 	}
 
 	public static boolean isDebugView() {
 		return debugView;
+	}
+
+	public static void login( Session session ){
+		loginSession = session;
+		isLoggedIn = true;
+		MainWindow.GetInstance().login( isLoggedIn );
+		DatabaseHandler.loadDatabasesFromDb();
+	}
+
+	public static void logout(){
+		loginSession.expire();
+		isLoggedIn = false;
+		MainWindow.GetInstance().login( isLoggedIn );
+		loginSession = null;
+		DatabaseHandler.reset();
+	}
+
+	public static Session getLoginSession() {
+		return loginSession;
+	}
+
+	public static void setLoginSession( Session loginSession ) {
+		Main.loginSession = loginSession;
+	}
+
+	public static boolean isLoggedIn() {
+		return isLoggedIn;
 	}
 }

@@ -1,6 +1,7 @@
 package tk.michael.project.util;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,5 +27,23 @@ public class Util {
 			result[i] = tempDupId[i];
 		}
 		return result;
+	}
+
+	/**
+	 * get the current UNIX timestamp
+	 * @return timestamp
+	 */
+	public static long getUnix(){
+		return System.currentTimeMillis() / 1000L;
+	}
+
+	/**
+	 * Converts Unix time to Calendar instance.
+	 * @return calendar object
+	 */
+	public static Calendar unixToCalendar(long unixTime){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTimeInMillis(unixTime);
+		return calendar;
 	}
 }

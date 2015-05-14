@@ -65,8 +65,8 @@ public class DatabaseBox implements MouseListener{
 		username.setBasicStyle();
 
 		name.setForeground( new Color( 0xD2D2D2 ) );
-		host.setForeground( new Color( 0xD2D2D2 ) );
-		username.setForeground( new Color( 0xD2D2D2 ) );
+		host.setForeground( new Color( 0xAEAEAE ) );
+		username.setForeground( new Color( 0xAEAEAE ) );
 
 		name.setFont( Font.BOLD, 13 );
 		panel.setBackground( new Color( 0x2F2F2F ) );
@@ -74,8 +74,8 @@ public class DatabaseBox implements MouseListener{
 		panel.add( this.name, "wmax 100px");
 		panel.add( edit, "x 130, y 5, wmin 16px, hmin 16px, pad 3px 5px 3px 3px, split 2" );
 		panel.add( remove, "x 150, y 5, wmin 16px, hmin 16px, pad 3px 5px 3px 3px, wrap" );
+		panel.add( this.username, "wrap" );
 		panel.add( this.host );
-		panel.add( this.username );
 
 	}
 
@@ -92,7 +92,7 @@ public class DatabaseBox implements MouseListener{
 		item = new JMenuItem("Edit");
 		item.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new EditDatabase( DatabaseHandler.getDabase( id ) ).display();
+				new EditDatabase( DatabaseHandler.getDatabase( id ) ).display();
 			}
 		});
 		menu.add(item);
@@ -119,7 +119,7 @@ public class DatabaseBox implements MouseListener{
 		}
 
 		if ( e.getSource() == edit ) {
-			new EditDatabase( DatabaseHandler.getDabase( id ) ).display();
+			new EditDatabase( DatabaseHandler.getDatabase( id ) ).display();
 		}
 
 		if ( e.getSource() == remove ) {

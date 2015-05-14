@@ -39,4 +39,18 @@ public class RegexTextField extends JTextField {
 			return ( pattern.matcher( this.getText() ).matches() ? true : false );
 		}
 	}
+
+	public boolean equals( RegexTextField testTo ){
+		if ( this.getText().equals( testTo.getText() ) ) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean equalsIgnoreCase( RegexTextField testTo ){
+		if ( this.getText().equalsIgnoreCase( testTo.getText() ) ) {
+			return true;
+		}
+		return false;
+	}
 }
