@@ -135,6 +135,10 @@ public class MenuActions implements ActionListener {
 			}
 		}
 
+		if ( action.equals( "openMainWindow" ) ) {
+			MainWindow.GetInstance().display();
+		}
+
 		IO.println( "menu action: " + ( action.isEmpty() ? "" : action ) );
 	}
 

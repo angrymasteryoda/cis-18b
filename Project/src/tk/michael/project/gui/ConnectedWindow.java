@@ -11,13 +11,15 @@ import tk.michael.project.util.SyntaxRegex;
 import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
+import javax.swing.tree.TreePath;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -37,6 +39,9 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 	private JPopupMenu navPopupMenu;
 
 	private JTextPane textPane;
+
+	private JTable table;
+	private DefaultTableModel dataModel;
 
 
 	public ConnectedWindow( UUID dbId ) {
@@ -64,16 +69,39 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		initMenu();
 		initNavTree();
 		initSyntaxEditor();
-		JPanel panel = new JPanel( new MigLayout( "w 738px!, h 600px" + ( Main.isDebugView() ? ",debug" : "" ) ) );
 
-		panel.add( new JScrollPane( navTree ), "dock west, w 200px, h 100%" );
-		panel.add( new JScrollPane( textPane ), "dock north, h 100px, w 400px");
+		setEmptyTable();
+		table = new JTable( dataModel ){
+			public boolean isCellEditable(int rowIndex, int vColIndex) {
+				return false;
+			}
+		};
 
-		frame.add( panel );
+		JPanel wrapper = new JPanel( new MigLayout( "w 738px!, h 600px, fill, inset 0" + ( Main.isDebugView() ? ",debug" : "" ) ) );
+
+		JPanel treePane = new JPanel( new MigLayout( "fill" ) );
+
+		JPanel scriptPane = new JPanel( new MigLayout( "fill, inset 0" ) );
+		JPanel tablePane = new JPanel( new MigLayout( "fill, inset 0" ) );
+//		JPanel rightPane = new JPanel( new MigLayout( "fill" ) );
+
+		treePane.add( new JScrollPane( navTree ), "dock west, w 200px, h 100%, grow" );
+		scriptPane.add( new JScrollPane( textPane ), "dock center, w 538px, h 50%, grow");
+		tablePane.add( new JScrollPane( table ), "dock center, w 538px, h 50%, grow" );
+		JSplitPane rightPane = new JSplitPane( JSplitPane.VERTICAL_SPLIT, true, scriptPane, tablePane );
+		rightPane.setBorder( null );
+		JSplitPane splitPane = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, true, treePane, rightPane );
+		splitPane.setBorder( null );
+
+		wrapper.add( splitPane, "grow, push" );
+		frame.add( wrapper );
 
 		frame.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
+//		frame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
 		frame.pack();
 		frame.setLocationRelativeTo( null );
+		splitPane.setDividerLocation( 200 ); //set it so the tree isnt tiny
+		rightPane.setDividerLocation( frame.getHeight() / 2); //set it so the tree isnt tiny
 	}
 
 	@Override
@@ -85,14 +113,22 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Load", "loadDbs", 'L', "Load from custom location" );
 		MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Set Save Location", "saveLoc", 0, "Sets the default save location" );
 		MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Exit", "exitApp", 'X', "Close the application" );
+		if ( Main.isArg( "dev" ) ) {
+			MenuHelper.createMenuItem( file, MenuHelper.PLAIN, "Open MainFrame", "openMainWindow", 0 );
+		}
 
 		JMenu database = new JMenu( "Database" );
-		file.setMnemonic( 'd' );
+		database.setMnemonic( 'd' );
 		MenuHelper.createMenuItem( database, MenuHelper.PLAIN, "Open Database", "openDatabase", 0,"Open a database" );
 		MenuHelper.createMenuItemCustomAction( database, MenuHelper.PLAIN, "Close Database", "closeDatabase", 0, "Close current connection", this );
 
+		JMenu script = new JMenu( "Script" );
+		script.setMnemonic( 's' );
+		MenuHelper.createMenuItemCustomAction( script, MenuHelper.PLAIN, "Run", "runScript", 0, "Run the Script", this );
+
 		menuBar.add( file );
 		menuBar.add( database );
+		menuBar.add( script );
 		frame.setJMenuBar( menuBar );
 	}
 
@@ -149,6 +185,21 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 				IO.println( selectedNode.getUserObject().toString() );
 			}
 		} );
+
+		MouseListener ml = new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if(SwingUtilities.isRightMouseButton(e)){
+					int selRow = navTree.getRowForLocation(e.getX(), e.getY());
+					TreePath selPath = navTree.getPathForLocation(e.getX(), e.getY());
+					navTree.setSelectionPath(selPath);
+					if (selRow>-1){
+						navTree.setSelectionRow(selRow);
+					}
+					selectedNode = (DefaultMutableTreeNode) navTree.getLastSelectedPathComponent();
+				}
+			}
+		};
+		navTree.addMouseListener(ml);
 
 		navTree.setRootVisible(false);
 	}
@@ -220,15 +271,16 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 			}
 		};
 		textPane = new JTextPane( doc );
-		textPane.setText( "CREATE TABLE users (\n" +
-			"\tid varchar(20) NOT NULL,\n" +
-			"\tusername varchar(50) NOT NULL,\n" +
-			"\temail VARCHAR(255) NOT NULL,\n" +
-			"\tpassword VARCHAR(35) NOT NULL,\n" +
-			"\tcreated int(11) NOT NULL, \n" +
-			"\tPRIMARY KEY (id),\n" +
-			"\tINDEX (email)\n" +
-			");" );
+//		textPane.setText( "CREATE TABLE users (\n" +
+//			"\tid varchar(20) NOT NULL,\n" +
+//			"\tusername varchar(50) NOT NULL,\n" +
+//			"\temail VARCHAR(255) NOT NULL,\n" +
+//			"\tpassword VARCHAR(35) NOT NULL,\n" +
+//			"\tcreated int(11) NOT NULL, \n" +
+//			"\tPRIMARY KEY (id),\n" +
+//			"\tINDEX (email)\n" +
+//			");" );
+		textPane.setText( "SELECT * FROM `cis18b`.`mr2358174_entity_databases` LIMIT 1000;" );
 	}
 
 	private int findLastNonWordChar( String text, int index ) {
@@ -256,5 +308,78 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		if ( action.equals( "closeDatabase" ) ) {
 			this.frame.dispose();
 		}
+
+		if ( action.equals( "treeSelect" ) ) {
+			DatabaseTreeNode db = (DatabaseTreeNode) selectedNode.getPath()[1];
+			textPane.setText( "SELECT * FROM `" + db.getDbName() + "`.`" + selectedNode.getUserObject().toString() + "` LIMIT 1000;" );
+		}
+
+		if ( action.equals( "runScript" ) ) {
+			runCommand( textPane.getText() );
+		}
+	}
+
+	private void runCommand( String cmd ){
+		String dbName = database.getDatabaseName();
+		try {
+			dbName = ( (DatabaseTreeNode) selectedNode.getPath()[1] ).getDbName();
+		} catch ( Exception e ) {
+			IO.println( "No database selected in tree using default" );
+		}
+
+
+		MysqlDatabase db = new MysqlDatabase( database );
+		try {
+			db.getConnection().setCatalog( dbName );
+		} catch ( SQLException e ) {
+			IO.println( "error choosing a db" );
+			e.printStackTrace();
+		}
+
+		if ( db.open() ) {
+			try {
+				Statement statement = db.getStatement();
+				ResultSet rs = statement.executeQuery( cmd );
+				ResultSetMetaData rsmd = rs.getMetaData();
+				IO.println( rsmd.getColumnName( 1 ) );
+				rs.last();
+				int rows = rs.getRow();
+				int cols = rsmd.getColumnCount();
+				rs.beforeFirst();
+				Object columnValues[][] = new Object[rows][cols];
+				Object columnNames[] = new Object[rsmd.getColumnCount()];
+				for ( int i = 1; i <= rsmd.getColumnCount(); i++ ){
+				    columnNames[i-1] = rsmd.getColumnName( i );
+				}
+
+
+
+				int counter = 0;
+				while ( rs.next() ) {
+					for ( int i = 1; i <= rsmd.getColumnCount(); i++ ){
+						columnValues[counter][i-1] = rs.getObject( i );
+					}
+					counter++;
+				}
+
+
+				setTableModel( columnValues, columnNames );
+
+			} catch ( SQLException e ) {
+				e.printStackTrace();
+			}
+			db.close();
+		}
+	}
+
+	private void setEmptyTable(){
+		String[] colHeadings = {"No Data"};
+		dataModel = new DefaultTableModel( 0, colHeadings.length );
+		dataModel.setColumnIdentifiers( colHeadings );
+	}
+
+	private void setTableModel( Object[][] data, Object[] columns ) {
+		dataModel = new DefaultTableModel(data, columns);
+		table.setModel(dataModel);
 	}
 }

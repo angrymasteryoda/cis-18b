@@ -136,7 +136,7 @@ public class EditDatabase extends BasicFrameObject implements ActionListener {
 				db.setHost( textFields.get( "host" ).getText() );
 				db.setPort( textFields.get( "port" ).getText() );
 				db.setUsername( textFields.get( "user" ).getText() );
-				db.setPassword( textFields.get( "pass" ).getText() );
+				db.setPassword( password.getText() );
 				db.setDatabaseName( textFields.get( "database" ).getText() );
 
 				DatabaseHandler.editDatabase( db );
@@ -154,7 +154,7 @@ public class EditDatabase extends BasicFrameObject implements ActionListener {
 				textFields.get( "host" ).getText(),
 				textFields.get( "port" ).getText(),
 				textFields.get( "user" ).getText(),
-				textFields.get( "pass" ).getText(),
+				password.getText(),
 				textFields.get(  "database" ).getText()
 			);
 

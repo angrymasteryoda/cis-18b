@@ -1,4 +1,4 @@
-mode=live
+mode=local
 db.local.url=jdbc:mysql://localhost:3306/cis18b
 db.local.user=root
 db.local.password=78dIHEN/0m8R/bXsb+iZsQ==

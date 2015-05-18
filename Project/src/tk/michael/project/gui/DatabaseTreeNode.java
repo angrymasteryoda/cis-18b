@@ -60,4 +60,23 @@ public class DatabaseTreeNode extends DefaultMutableTreeNode {
 
 	}
 
+	public Database getDatabase() {
+		return database;
+	}
+
+	public void setDatabase( Database database ) {
+		this.database = database;
+	}
+
+	public DefaultMutableTreeNode getTableNode() {
+		return tableNode;
+	}
+
+	public void setTableNode( DefaultMutableTreeNode tableNode ) {
+		this.tableNode = tableNode;
+	}
+
+	public String getDbName() {
+		return dbName;
+	}
 }

@@ -23,11 +23,14 @@ public class Main {
 	private static boolean isLoggedIn = false;
 
 	private static boolean debugView  = false;
+	private static String[] arugments;
 
 	public static void main( String[] args ) throws Exception{
-		if ( Arrays.asList( args ).contains( "debugview".toLowerCase() ) ) {
+		arugments = args;
+		if ( Arrays.asList( args ).contains( "debug".toLowerCase() ) ) {
 			debugView = true;
 		}
+
 		try {
 			for ( UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels() ){
 				if ( "Nimbus".equals( info.getName() ) ) {
@@ -75,5 +78,9 @@ public class Main {
 
 	public static boolean isLoggedIn() {
 		return isLoggedIn;
+	}
+
+	public static boolean isArg( String str ){
+		return Arrays.asList( arugments ).contains( str );
 	}
 }
