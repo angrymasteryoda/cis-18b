@@ -329,15 +329,10 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 
 
 		MysqlDatabase db = new MysqlDatabase( database );
-		try {
-			db.getConnection().setCatalog( dbName );
-		} catch ( SQLException e ) {
-			IO.println( "error choosing a db" );
-			e.printStackTrace();
-		}
 
 		if ( db.open() ) {
 			try {
+				db.getConnection().setCatalog( dbName );
 				Statement statement = db.getStatement();
 				ResultSet rs = statement.executeQuery( cmd );
 				ResultSetMetaData rsmd = rs.getMetaData();
