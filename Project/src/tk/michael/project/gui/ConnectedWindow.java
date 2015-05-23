@@ -3,6 +3,8 @@ package tk.michael.project.gui;
 import com.michael.api.IO.IO;
 import net.miginfocom.swing.MigLayout;
 import tk.michael.project.Main;
+import tk.michael.project.db.Commands;
+import tk.michael.project.db.ConnectionStatus;
 import tk.michael.project.db.MysqlDatabase;
 import tk.michael.project.util.Database;
 import tk.michael.project.util.DatabaseHandler;
@@ -55,10 +57,11 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 	@Override
 	public void display(){
 		//test we can connect first
-		if ( MysqlDatabase.testConnection( this.database ) ) {
+		ConnectionStatus status = MysqlDatabase.testConnection( this.database );
+		if ( status.isConnected() ) {
 			frame.setVisible( true );
 		} else {
-			JOptionPane.showOptionDialog( null, "Unable to open database.\nMake sure the information you provided is correct and you are connected to the internet",
+			JOptionPane.showOptionDialog( null, "Unable to open database.\nMake sure the information you provided is correct and you are connected to the internet.\n" + status.getReason(),
 				"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null );
 
 		}
@@ -85,7 +88,7 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		JPanel tablePane = new JPanel( new MigLayout( "fill, inset 0" ) );
 //		JPanel rightPane = new JPanel( new MigLayout( "fill" ) );
 
-		treePane.add( new JScrollPane( navTree ), "dock west, w 200px, h 100%, grow" );
+		treePane.add( new JScrollPane( navTree ), "dock west, w 100%, h 100%, grow" );
 		scriptPane.add( new JScrollPane( textPane ), "dock center, w 538px, h 50%, grow");
 		tablePane.add( new JScrollPane( table ), "dock center, w 538px, h 50%, grow" );
 		JSplitPane rightPane = new JSplitPane( JSplitPane.VERTICAL_SPLIT, true, scriptPane, tablePane );
@@ -271,16 +274,19 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 			}
 		};
 		textPane = new JTextPane( doc );
-//		textPane.setText( "CREATE TABLE users (\n" +
-//			"\tid varchar(20) NOT NULL,\n" +
-//			"\tusername varchar(50) NOT NULL,\n" +
-//			"\temail VARCHAR(255) NOT NULL,\n" +
-//			"\tpassword VARCHAR(35) NOT NULL,\n" +
-//			"\tcreated int(11) NOT NULL, \n" +
-//			"\tPRIMARY KEY (id),\n" +
-//			"\tINDEX (email)\n" +
-//			");" );
-		textPane.setText( "SELECT * FROM `cis18b`.`mr2358174_entity_databases` LIMIT 1000;" );
+		textPane.setText(
+			"DROP TABLE IF EXISTS `test`;\n" +
+			"CREATE TABLE test (\n" +
+			"\tid varchar(20) NOT NULL,\n" +
+			"\tusername varchar(50) NOT NULL,\n" +
+			"\temail VARCHAR(255) NOT NULL,\n" +
+			"\tpassword VARCHAR(35) NOT NULL,\n" +
+			"\tcreated int(11) NOT NULL, \n" +
+			"\tPRIMARY KEY (id),\n" +
+			"\tINDEX (email)\n" +
+			");\n" +
+			"SELECT * FROM `cis18b`.`mr2358174_entity_databases` LIMIT 1000;"
+		);
 	}
 
 	private int findLastNonWordChar( String text, int index ) {
@@ -320,11 +326,18 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 	}
 
 	private void runCommand( String cmd ){
+		Commands commands = new Commands( cmd );
 		String dbName = database.getDatabaseName();
 		try {
 			dbName = ( (DatabaseTreeNode) selectedNode.getPath()[1] ).getDbName();
 		} catch ( Exception e ) {
 			IO.println( "No database selected in tree using default" );
+		}
+
+		if ( dbName.isEmpty() ) {
+			JOptionPane.showOptionDialog( null, "You must select a default database by clicking on the database to the left or set in the edit database",
+				"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null );
+			return;
 		}
 
 
@@ -333,32 +346,43 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		if ( db.open() ) {
 			try {
 				db.getConnection().setCatalog( dbName );
-				Statement statement = db.getStatement();
-				ResultSet rs = statement.executeQuery( cmd );
-				ResultSetMetaData rsmd = rs.getMetaData();
-				IO.println( rsmd.getColumnName( 1 ) );
-				rs.last();
-				int rows = rs.getRow();
-				int cols = rsmd.getColumnCount();
-				rs.beforeFirst();
-				Object columnValues[][] = new Object[rows][cols];
-				Object columnNames[] = new Object[rsmd.getColumnCount()];
-				for ( int i = 1; i <= rsmd.getColumnCount(); i++ ){
-				    columnNames[i-1] = rsmd.getColumnName( i );
-				}
+				while( commands.next() ){
+					if ( commands.getCommandType() == Commands.SELECT ) {
+						Statement statement = db.getNewStatement();
+						ResultSet rs = statement.executeQuery( commands.getCommand() );
+						ResultSetMetaData rsmd = rs.getMetaData();
+						IO.println( rsmd.getColumnName( 1 ) );
+						rs.last();
+						int rows = rs.getRow();
+						int cols = rsmd.getColumnCount();
+						rs.beforeFirst();
+						Object columnValues[][] = new Object[rows][cols];
+						Object columnNames[] = new Object[rsmd.getColumnCount()];
+						for ( int i = 1; i <= rsmd.getColumnCount(); i++ ){
+							columnNames[i-1] = rsmd.getColumnName( i );
+						}
 
+						int counter = 0;
+						while ( rs.next() ) {
+							for ( int i = 1; i <= rsmd.getColumnCount(); i++ ){
+								columnValues[counter][i-1] = rs.getObject( i );
+							}
+							counter++;
+						}
 
-
-				int counter = 0;
-				while ( rs.next() ) {
-					for ( int i = 1; i <= rsmd.getColumnCount(); i++ ){
-						columnValues[counter][i-1] = rs.getObject( i );
+						setTableModel( columnValues, columnNames );
 					}
-					counter++;
+					else if( commands.getCommandType() == Commands.USE ){
+						//todo test this
+						db.getConnection().setCatalog( commands.getCommand().replaceAll( "(?i:use\\s+[\\`|\\'|\\\"]?(.+?)[\\`|\\'|\\\"]?;?$)", "$1" ) );
+					}
+					else {
+						//going to run edits
+						Statement statement = db.getNewStatement();
+						statement.executeUpdate( commands.getCommand() );
+					}
 				}
 
-
-				setTableModel( columnValues, columnNames );
 
 			} catch ( SQLException e ) {
 				e.printStackTrace();

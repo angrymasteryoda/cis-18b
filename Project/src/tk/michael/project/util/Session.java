@@ -8,6 +8,7 @@ import tk.michael.project.db.MysqlDatabase;
 import java.io.*;
 import java.nio.file.Files;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
@@ -92,7 +93,10 @@ public class Session implements Serializable {
 			}
 		}
 		db.close();
-
+		File file = new File( outFileName );
+		if ( file.exists() ) {
+			file.delete();
+		}
 	}
 
 	public void serialize(){
@@ -115,16 +119,34 @@ public class Session implements Serializable {
 	public static void load(){
 		final Session session = read();
 		if ( session != null ) {
-			if ( session.getExpires() < Util.getUnix() ) {
-				//session expired don't log them in and expire them
-				Thread thread = new Thread(){
-					public void run(){
+			long serverExpire = session.getExpires();
+			//verify server session exists and not expired
+			MysqlDatabase db = new MysqlDatabase();
+			if ( db.open() ) {
+				try {
+					PreparedStatement statement = db.query( "SELECT `expires` FROM " + DbUtils.prependTable( "sessions" ) + " WHERE user=?" );
+					statement.setString( 1, session.getUserId().toString() );
+					ResultSet res = statement.executeQuery();
+					if ( res.next() ) {
+						serverExpire = res.getLong( 1 );
+					} else {
+						//doesn't exist in server so log out
 						session.expire();
 					}
-				};
+				} catch ( SQLException e ) {
+					IO.println( "Unable to talk to session server" );
+					e.printStackTrace();
+				}
+				if ( serverExpire < Util.getUnix() ) {
+					session.expire();
+				} else {
+					Main.login( session );
+				}
 			} else {
-				Main.login( session );
+				//couldn't verify from server you should even be able to login or save at this point probably
+				session.expire();
 			}
+			db.close();
 		}
 	}
 

@@ -26,6 +26,7 @@ public class Main {
 	private static String[] arugments;
 
 	public static void main( String[] args ) throws Exception{
+		//*
 		arugments = args;
 		if ( Arrays.asList( args ).contains( "debug".toLowerCase() ) ) {
 			debugView = true;
@@ -46,7 +47,7 @@ public class Main {
 //		ConnectedWindow cw = new ConnectedWindow( DatabaseHandler.getDatabases().get( 0 ).getId() );
 //		cw.display();
 		MainWindow.GetInstance().display();
-
+		//*/
 	}
 
 	public static boolean isDebugView() {

@@ -93,7 +93,7 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 		loginLabel.setCursor( new Cursor( Cursor.HAND_CURSOR ) );
 
 		loginPanel.add( loginLabel, "dock west, w 40!, pad 5 0 5 0" );
-		loginPanel.add( loginLabelText, "dock west, pad 5 15 5 0, w 150! " );
+		loginPanel.add( loginLabelText, "dock west, pad 5 15 5 0, w 350! " );
 
 		frame.add( loginPanel, BorderLayout.SOUTH );
 
@@ -146,10 +146,12 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 		if ( state ) {
 			//we logged in
 			loginLabelText.setText( "Logged in as, " + Main.getLoginSession().getUsername() );
+			loginLabel.validate();
 			loginLabel.setIcon( logoutIcon );
 			loginLabel.setToolTipText( "Log out" );
 		} else{
 			loginLabelText.setText( "Log into the cloud"  );
+			loginLabel.validate();
 			loginLabel.setIcon( loginIcon );
 			loginLabel.setToolTipText( "Log into the cloud" );
 		}

@@ -1,6 +1,7 @@
 package tk.michael.project.gui;
 
 import net.miginfocom.swing.MigLayout;
+import tk.michael.project.db.ConnectionStatus;
 import tk.michael.project.db.MysqlDatabase;
 import tk.michael.project.util.Database;
 import tk.michael.project.util.DatabaseHandler;
@@ -158,10 +159,11 @@ public class EditDatabase extends BasicFrameObject implements ActionListener {
 				textFields.get(  "database" ).getText()
 			);
 
-			boolean state = MysqlDatabase.testConnection( db.getUrl(), db.getUsername(), db.getPassword() );
+			ConnectionStatus status = MysqlDatabase.testConnection( db.getUrl(), db.getUsername(), db.getPassword() );
 			String message = "Connected successfully!";
-			if ( !state ) {
-				message = "Unable to connect.";
+			if ( !status.isConnected() ) {
+				message = "<html><p>Unable to connect.</p><p>";
+				message += status.getReason() + "</p></html>";
 			}
 
 			JOptionPane.showMessageDialog( frame, message );

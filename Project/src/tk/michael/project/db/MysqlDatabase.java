@@ -72,12 +72,12 @@ public class MysqlDatabase {
 	 * @param password password for database
 	 * @return true if successful
 	 */
-	public static boolean testConnection( String url, String username, String password ){
+	public static ConnectionStatus testConnection( String url, String username, String password ){
 		try {
 			Connection connection = DriverManager.getConnection( url, username, password );
-			return connection.isValid( 5 );
+			return new ConnectionStatus( connection.isValid( 5 ) );
 		} catch ( SQLException e ) {
-			return false;
+			return new ConnectionStatus( e );
 		}
 	}
 
@@ -86,12 +86,12 @@ public class MysqlDatabase {
 	 * @param db Database onject
 	 * @return true if successful
 	 */
-	public static boolean testConnection( Database db ){
+	public static ConnectionStatus testConnection( Database db ){
 		try {
 			Connection connection = DriverManager.getConnection( db.getUrl(), db.getUsername(), db.getPassword() );
-			return connection.isValid( 5 );
+			return new ConnectionStatus( connection.isValid( 5 ) );
 		} catch ( SQLException e ) {
-			return false;
+			return new ConnectionStatus( e );
 		}
 	}
 
@@ -262,6 +262,15 @@ public class MysqlDatabase {
 	}
 
 	public Statement getStatement() {
+		return statement;
+	}
+
+	public Statement getNewStatement(){
+		try {
+			statement = connection.createStatement();
+		} catch ( SQLException e ) {
+			return null;
+		}
 		return statement;
 	}
 
