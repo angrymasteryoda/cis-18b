@@ -1,5 +1,6 @@
 package tk.michael.project.gui;
 
+import com.thehowtotutorial.splashscreen.JSplash;
 import net.miginfocom.swing.MigLayout;
 import tk.michael.project.Main;
 import tk.michael.project.util.Database;

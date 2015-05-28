@@ -20,6 +20,7 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
@@ -56,14 +57,21 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 
 	@Override
 	public void display(){
-		//test we can connect first
-		ConnectionStatus status = MysqlDatabase.testConnection( this.database );
-		if ( status.isConnected() ) {
-			frame.setVisible( true );
-		} else {
-			JOptionPane.showOptionDialog( null, "Unable to open database.\nMake sure the information you provided is correct and you are connected to the internet.\n" + status.getReason(),
-				"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null );
+		//check if we can even open the window
+		if ( WindowManager.open( dbId, frame ) ) {
+			//test we can connect first
+			ConnectionStatus status = MysqlDatabase.testConnection( this.database );
+			if ( status.isConnected() ) {
+				frame.setVisible( true );
+			} else {
+				JOptionPane.showOptionDialog( null, "Unable to open database.\nMake sure the information you provided is correct and you are connected to the internet.\n" + status.getReason(),
+					"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null );
 
+			}
+		}
+		else {
+			JOptionPane.showOptionDialog( null, "Already open. Can not open another",
+				"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null );
 		}
 	}
 
@@ -99,8 +107,8 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		wrapper.add( splitPane, "grow, push" );
 		frame.add( wrapper );
 
-		frame.setDefaultCloseOperation( WindowConstants.DISPOSE_ON_CLOSE );
-//		frame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
+		frame.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE );
+		frame.addWindowListener( new WindowCloseEvent( frame, dbId ) );
 		frame.pack();
 		frame.setLocationRelativeTo( null );
 		splitPane.setDividerLocation( 200 ); //set it so the tree isnt tiny
@@ -128,6 +136,8 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		JMenu script = new JMenu( "Script" );
 		script.setMnemonic( 's' );
 		MenuHelper.createMenuItemCustomAction( script, MenuHelper.PLAIN, "Run", "runScript", 0, "Run the Script", this );
+		MenuHelper.createMenuItemCustomAction( script, MenuHelper.PLAIN, "Open Script", "openScript", 0, "Open a Script File", this );
+		MenuHelper.createMenuItemCustomAction( script, MenuHelper.PLAIN, "Save Script", "saveScript", 0, "Save a Script File", this );
 
 		menuBar.add( file );
 		menuBar.add( database );
@@ -239,7 +249,6 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 
 				while ( wordR <= after ) {
 					if ( wordR == after || String.valueOf( text.charAt( wordR ) ).matches( "\\W" ) ) {
-//						String subStr = text.substring( wordL, wordR );
 						if ( text.substring( wordL, wordR ).matches( SyntaxRegex.mysqlCommand() ) )
 							setCharacterAttributes( wordL, wordR - wordL, attrCommand, false );
 						else if ( text.substring( wordL, wordR ).matches( SyntaxRegex.mysqlDataType() ) )
@@ -323,6 +332,14 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		if ( action.equals( "runScript" ) ) {
 			runCommand( textPane.getText() );
 		}
+
+		if ( action.equals( "openScript" ) ) {
+			openScript();
+		}
+
+		if ( action.equals( "saveScript" ) ) {
+			saveScript();
+		}
 	}
 
 	private void runCommand( String cmd ){
@@ -347,6 +364,7 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 			try {
 				db.getConnection().setCatalog( dbName );
 				while( commands.next() ){
+					IO.println( commands.getCommand().replaceAll( "\n", "" ) );
 					if ( commands.getCommandType() == Commands.SELECT ) {
 						Statement statement = db.getNewStatement();
 						ResultSet rs = statement.executeQuery( commands.getCommand() );
@@ -373,19 +391,23 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 						setTableModel( columnValues, columnNames );
 					}
 					else if( commands.getCommandType() == Commands.USE ){
-						//todo test this
 						db.getConnection().setCatalog( commands.getCommand().replaceAll( "(?i:use\\s+[\\`|\\'|\\\"]?(.+?)[\\`|\\'|\\\"]?;?$)", "$1" ) );
 					}
 					else {
 						//going to run edits
 						Statement statement = db.getNewStatement();
-						statement.executeUpdate( commands.getCommand() );
+						int status = statement.executeUpdate( commands.getCommand() );
+						if ( status > 0 ) {
+							IO.println( "Rows Affected: " + status );
+						}
 					}
 				}
 
 
 			} catch ( SQLException e ) {
 				e.printStackTrace();
+				JOptionPane.showOptionDialog( null, "Error occurred.\n" + e.getMessage(),
+					"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null );
 			}
 			db.close();
 		}
@@ -401,4 +423,55 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		dataModel = new DefaultTableModel(data, columns);
 		table.setModel(dataModel);
 	}
+
+	private void openScript(){
+		String[][] filter = { { "SQL File", "sql" }, { "Text File", "txt" } };
+		FileChooser fc = new FileChooser( "Choose Save Location", filter );
+		File file;
+		if ( ( file = fc.display() ) != null ) {
+			if ( file.isFile() ) {
+				try {
+					textPane.setText( "" );
+					BufferedReader reader = new BufferedReader( new FileReader( file ) );
+					String line = "";
+					while (  ( line = reader.readLine() ) != null ){
+						textPane.setText( textPane.getText() + line + "\n"  );
+					}
+				} catch ( IOException e ) {
+					e.printStackTrace();
+				}
+			} else {
+				JOptionPane.showMessageDialog( null, "Not a valid directory to choose from!" );
+			}
+		}
+	}
+
+	private void saveScript(){
+		FileChooser fc = new FileChooser( "Save as" );
+		File file;
+		if ( ( file = fc.display() ) != null ) {
+			if ( file.isFile() ) {
+				FileWriter writer = null;
+				try {
+					writer = new FileWriter( file.getAbsolutePath() );
+					textPane.write( writer );
+				}
+				catch ( IOException e ){
+					IO.println( "failed to save" );
+					e.printStackTrace();
+				}
+				finally {
+					if ( writer != null ) {
+						try {
+							writer.close();
+						} catch ( IOException e ) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+
+	}
+
 }

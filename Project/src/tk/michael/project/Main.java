@@ -2,6 +2,7 @@ package tk.michael.project;
 
 import com.michael.api.IO.IO;
 import com.michael.api.security.AES;
+import com.thehowtotutorial.splashscreen.JSplash;
 import tk.michael.project.gui.AddDatabase;
 import tk.michael.project.gui.ConnectedWindow;
 import tk.michael.project.gui.DirectoryChooser;
@@ -10,6 +11,7 @@ import tk.michael.project.util.DatabaseHandler;
 import tk.michael.project.util.Session;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.Arrays;
 
 /**
@@ -42,10 +44,17 @@ public class Main {
 		}
 		catch ( Exception e) { }
 
+		JSplash splash = new JSplash( Main.class.getResource( "/splash.png" ), false, false, false, "1.0", null, new Color( 0x00618A), Color.black );
+
+		if ( !isArg( "dev" ) ) {
+			splash.splashOn();
+			Thread.sleep( 2000l ); //cause we load really fast
+		}
 		DatabaseHandler.load();
 		Session.load();
 //		ConnectedWindow cw = new ConnectedWindow( DatabaseHandler.getDatabases().get( 0 ).getId() );
 //		cw.display();
+		if ( !isArg( "dev" ) ) splash.splashOff();
 		MainWindow.GetInstance().display();
 		//*/
 	}

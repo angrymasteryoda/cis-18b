@@ -13,9 +13,7 @@ import java.io.File;
 public class DirectoryChooser extends JPanel implements ActionListener {
 
 	JFileChooser chooser;
-	public DirectoryChooser( String title) {
-		int result;
-
+	public DirectoryChooser( String title ) {
 		chooser = new JFileChooser(  );
 		chooser.setCurrentDirectory( new File( "." ) );
 		chooser.setDialogTitle( title );

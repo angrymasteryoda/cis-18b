@@ -97,7 +97,8 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 
 		frame.add( loginPanel, BorderLayout.SOUTH );
 
-		frame.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
+		frame.setDefaultCloseOperation( WindowConstants.DO_NOTHING_ON_CLOSE );
+		frame.addWindowListener( new WindowCloseEvent( frame, true ) );
 		frame.pack();
 		frame.setLocationRelativeTo( null );
 	}
