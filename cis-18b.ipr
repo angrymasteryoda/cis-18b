@@ -8,7 +8,6 @@
           <element id="file-copy" path="$PROJECT_DIR$/Project/manifest.mf" output-file-name="MANIFEST.MF" />
         </element>
         <element id="module-output" name="Project" />
-        <element id="extracted-dir" path="$PROJECT_DIR$/Project/lib/JSplashScreen.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/Project/lib/miglayout-swing-5.0.jar" path-in-jar="/" />
         <element id="extracted-dir" path="$PROJECT_DIR$/Project/lib/myApi.jar" path-in-jar="/" />
       </root>

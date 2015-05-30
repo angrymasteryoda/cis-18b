@@ -19,9 +19,19 @@ public abstract class BasicFrameObject {
 		frame = new JFrame( title );
 	}
 
+	/**
+	 * Init graphical interface
+	 */
 	protected abstract void init();
+
+	/**
+	 * Init menus
+	 */
 	protected abstract void initMenu();
 
+	/**
+	 * Display the window
+	 */
 	public void display(){
 		frame.setVisible( true );
 	}

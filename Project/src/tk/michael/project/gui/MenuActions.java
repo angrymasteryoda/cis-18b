@@ -95,8 +95,7 @@ public class MenuActions implements ActionListener {
 					}
 				}
 				if ( id != -1 ) {
-					ConnectedWindow cw = new ConnectedWindow( uuids[id] );
-					cw.display();
+					DatabaseHandler.openDatabase( uuids[id] );
 				}
 			}
 		}

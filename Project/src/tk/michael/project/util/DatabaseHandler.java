@@ -2,11 +2,14 @@ package tk.michael.project.util;
 
 import com.michael.api.IO.IO;
 import com.michael.api.security.AES;
+import com.michael.api.swing.MSplashScreen;
 import tk.michael.project.Main;
 import tk.michael.project.db.DbUtils;
 import tk.michael.project.db.MysqlDatabase;
+import tk.michael.project.gui.ConnectedWindow;
 import tk.michael.project.gui.MainWindow;
 
+import java.awt.*;
 import java.io.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -206,6 +209,22 @@ public class DatabaseHandler {
 				}
 			}
 		}
+	}
+
+	public static void openDatabase( final UUID id ){
+		final MSplashScreen splash = new MSplashScreen( Main.class.getResource( "/loading.png" ), true, true, false, "", null, new Color( 0x00618A ), Color.black );
+		splash.setIndeterminate( true );
+		splash.on();
+		Thread thread = new Thread( ){
+			public void run(){
+				splash.setProgress( "Connecting" );
+				ConnectedWindow connectedWindow = new ConnectedWindow( id );
+				connectedWindow.display();
+				splash.off();
+			}
+		};
+
+		thread.start();
 	}
 
 	public static void reset(){

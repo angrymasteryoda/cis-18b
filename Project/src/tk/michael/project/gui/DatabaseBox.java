@@ -1,6 +1,5 @@
 package tk.michael.project.gui;
 
-import com.thehowtotutorial.splashscreen.JSplash;
 import net.miginfocom.swing.MigLayout;
 import tk.michael.project.Main;
 import tk.michael.project.util.Database;
@@ -84,8 +83,7 @@ public class DatabaseBox implements MouseListener{
 		JMenuItem item = new JMenuItem("Open");
 		item.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ConnectedWindow connectedWindow = new ConnectedWindow( id );
-				connectedWindow.display();
+				DatabaseHandler.openDatabase( id );
 			}
 		});
 		menu.add(item);
@@ -130,8 +128,8 @@ public class DatabaseBox implements MouseListener{
 		if ( e.getSource() == panel ) {
 			if ( e.getClickCount() == 2 ) {
 				//open to connected window
-				ConnectedWindow connectedWindow = new ConnectedWindow( id );
-				connectedWindow.display();
+				DatabaseHandler.openDatabase( id );
+
 			}
 		}
 	}

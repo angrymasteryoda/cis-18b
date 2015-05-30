@@ -2,7 +2,7 @@ package tk.michael.project;
 
 import com.michael.api.IO.IO;
 import com.michael.api.security.AES;
-import com.thehowtotutorial.splashscreen.JSplash;
+import com.michael.api.swing.MSplashScreen;
 import tk.michael.project.gui.AddDatabase;
 import tk.michael.project.gui.ConnectedWindow;
 import tk.michael.project.gui.DirectoryChooser;
@@ -44,18 +44,30 @@ public class Main {
 		}
 		catch ( Exception e) { }
 
-		JSplash splash = new JSplash( Main.class.getResource( "/splash.png" ), false, false, false, "1.0", null, new Color( 0x00618A), Color.black );
+		final MSplashScreen splash = new MSplashScreen( Main.class.getResource( "/splash.png" ), false, false, false, "1.0", null, new Color( 0x00618A), Color.black );
 
 		if ( !isArg( "dev" ) ) {
-			splash.splashOn();
-			Thread.sleep( 2000l ); //cause we load really fast
+			splash.on();
+			//Thread.sleep( 2000l ); //cause we load really fast
 		}
-		DatabaseHandler.load();
-		Session.load();
+		Thread thread = new Thread(  ){
+			public void run(){
+				DatabaseHandler.load();
+				Session.load();
+				try {
+					sleep( 500l );
+				} catch ( InterruptedException e ) {}
+				MainWindow.GetInstance().display();
+				if ( !isArg( "dev" ) ) splash.off();
+			}
+		};
+		thread.start();
+//		DatabaseHandler.load();
+//		Session.load();
 //		ConnectedWindow cw = new ConnectedWindow( DatabaseHandler.getDatabases().get( 0 ).getId() );
 //		cw.display();
-		if ( !isArg( "dev" ) ) splash.splashOff();
-		MainWindow.GetInstance().display();
+//		if ( !isArg( "dev" ) ) splash.off();
+//		MainWindow.GetInstance().display();
 		//*/
 	}
 

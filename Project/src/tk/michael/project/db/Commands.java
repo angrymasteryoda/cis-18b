@@ -18,12 +18,19 @@ public class Commands {
 	private ArrayList<String> commands;
 	private int index = -1;
 
+	/**
+	 * Mysql commands made into a iterator
+	 * @param raw all the commands entered by user
+	 */
 	public Commands( String raw ) {
 		this.commands = new ArrayList<>();
 		this.raw = raw;
 		read();
 	}
 
+	/**
+	 * Read the raw commands and split them up based on semicolons
+	 */
 	private void read(){
 		boolean dQuote = false;
 		boolean sQuote = false;
@@ -63,6 +70,10 @@ public class Commands {
 		}
 	}
 
+	/**
+	 * move iterator to next position
+	 * @return true if has a next, false if there isnt a next
+	 */
 	public boolean next(){
 		try {
 			commands.get( ++index );
@@ -72,22 +83,39 @@ public class Commands {
 		}
 	}
 
+	/**
+	 * move the iterator to the first index
+	 */
 	public void first(){
 		index = 0;
 	}
 
+	/**
+	 * move the iterator to before the first index
+	 */
 	public void beforeFirst(){
 		index = -1;
 	}
 
+	/**
+	 * move the iterator to the last index
+	 */
 	public void last(){
 		index = commands.size();
 	}
 
+	/**
+	 * get the command at the iterator
+	 * @return string of the command
+	 */
 	public String getCommand(){
 		return commands.get( index );
 	}
 
+	/**
+	 * get the type of command select, use, other
+	 * @return type of command see constants
+	 */
 	public int getCommandType(){
 		String s = commands.get( index );
 		if ( s.matches( "(?i:select.+?$)" ) ) {

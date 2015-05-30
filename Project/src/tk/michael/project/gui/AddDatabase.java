@@ -30,6 +30,9 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 		init();
 	}
 
+	/**
+	 * Init graphical interface
+	 */
 	@Override
 	protected void init() {
 		JPanel panel = new JPanel( new MigLayout(  ) );
@@ -100,11 +103,18 @@ public class AddDatabase extends BasicFrameObject implements ActionListener{
 		frame.setLocationRelativeTo( null );
 	}
 
+	/**
+	 * Init menus
+	 */
 	@Override
 	protected void initMenu() {
 		//no menus here
 	}
 
+	/**
+	 * Handle any local actions
+	 * @param e ActionEvent
+	 */
 	@Override
 	public void actionPerformed( ActionEvent e ) {
 		String action = e.getActionCommand();

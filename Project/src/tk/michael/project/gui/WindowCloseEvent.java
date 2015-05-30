@@ -63,5 +63,10 @@ public class WindowCloseEvent extends WindowAdapter {
 		else {
 			return;
 		}
+
+		//verify we did indeed close
+		if ( willCloseAll ) {
+			System.exit( 0 );
+		}
 	}
 }

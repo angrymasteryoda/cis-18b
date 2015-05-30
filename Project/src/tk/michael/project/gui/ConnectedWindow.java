@@ -55,6 +55,9 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		init();
 	}
 
+	/**
+	 * shows the window
+	 */
 	@Override
 	public void display(){
 		//check if we can even open the window
@@ -75,6 +78,9 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		}
 	}
 
+	/**
+	 * Init the graphical interface
+	 */
 	@Override
 	protected void init() {
 		initMenu();
@@ -115,6 +121,9 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		rightPane.setDividerLocation( frame.getHeight() / 2); //set it so the tree isnt tiny
 	}
 
+	/**
+	 * init the menus
+	 */
 	@Override
 	protected void initMenu() {
 		JMenuBar menuBar = new JMenuBar();
@@ -145,6 +154,9 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		frame.setJMenuBar( menuBar );
 	}
 
+	/**
+	 * init the nav tree containing the db and table
+	 */
 	private void initNavTree(){
 		initTreePopUpMenu();
 		ArrayList<String> databases = new ArrayList<>();
@@ -217,6 +229,9 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		navTree.setRootVisible(false);
 	}
 
+	/**
+	 * init the menu used when right clicking the tree
+	 */
 	private void initTreePopUpMenu(){
 		navPopupMenu = new JPopupMenu();
 		JMenuItem item = new JMenuItem( "Select * From" );
@@ -225,6 +240,9 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		navPopupMenu.add( item );
 	}
 
+	/**
+	 * init the script editor and syntax highlighting
+	 */
 	private void initSyntaxEditor() {
 		final StyleContext cont = StyleContext.getDefaultStyleContext();
 		final AttributeSet attrCommand = cont.addAttribute( cont.getEmptySet(), StyleConstants.Foreground, Color.RED );
@@ -298,6 +316,12 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		);
 	}
 
+	/**
+	 * find the last none word character
+	 * @param text text to search
+	 * @param index starting index
+	 * @return index of none word char
+	 */
 	private int findLastNonWordChar( String text, int index ) {
 		while ( --index >= 0 ) {
 			if ( String.valueOf( text.charAt( index ) ).matches( "\\W" ) ) {
@@ -307,6 +331,12 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		return index;
 	}
 
+	/**
+	 * find the first none word character
+	 * @param text text to search
+	 * @param index starting index
+	 * @return index of none word char
+	 */
 	private int findFirstNonWordChar( String text, int index ) {
 		while ( index < text.length() ) {
 			if ( String.valueOf( text.charAt( index ) ).matches( "\\W" ) ) {
@@ -317,6 +347,10 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		return index;
 	}
 
+	/**
+	 * handle any local actions
+	 * @param e Action event
+	 */
 	@Override
 	public void actionPerformed( ActionEvent e ) {
 		String action = e.getActionCommand();
@@ -342,6 +376,10 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		}
 	}
 
+	/**
+	 * Run the sql script the user has inputted
+	 * @param cmd raw text user typed
+	 */
 	private void runCommand( String cmd ){
 		Commands commands = new Commands( cmd );
 		String dbName = database.getDatabaseName();
@@ -413,17 +451,28 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		}
 	}
 
+	/**
+	 * set the result table to be empty
+	 */
 	private void setEmptyTable(){
 		String[] colHeadings = {"No Data"};
 		dataModel = new DefaultTableModel( 0, colHeadings.length );
 		dataModel.setColumnIdentifiers( colHeadings );
 	}
 
+	/**
+	 * set the result table to have data
+	 * @param data data that gos in the table
+	 * @param columns column names
+	 */
 	private void setTableModel( Object[][] data, Object[] columns ) {
 		dataModel = new DefaultTableModel(data, columns);
 		table.setModel(dataModel);
 	}
 
+	/**
+	 * open a file and input the contents into the script pane
+	 */
 	private void openScript(){
 		String[][] filter = { { "SQL File", "sql" }, { "Text File", "txt" } };
 		FileChooser fc = new FileChooser( "Choose Save Location", filter );
@@ -446,6 +495,9 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		}
 	}
 
+	/**
+	 * save the script pane to a file
+	 */
 	private void saveScript(){
 		FileChooser fc = new FileChooser( "Save as" );
 		File file;
