@@ -21,6 +21,7 @@ public class DbUtils {
 			case "users" :
 			case "sessions" :
 			case "databases" : return TableTypes.E.toString();
+			case "user_database" : return TableTypes.X.toString();
 		}
 		return "";
 	}

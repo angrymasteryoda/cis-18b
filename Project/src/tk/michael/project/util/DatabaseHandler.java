@@ -82,6 +82,7 @@ public class DatabaseHandler {
 			e.printStackTrace();
 		}
 	}
+
 	public static void save(){
 		Thread thread = new Thread(){
 			public void run(){
@@ -126,6 +127,8 @@ public class DatabaseHandler {
 			MysqlDatabase db = new MysqlDatabase();
 			Session session = Main.getLoginSession();
 			if ( db.open() ) {
+				//todo make this an xref table
+//				int find = db.numRows( DbUtils.prependTable( "user_database" ), "user='" + session.getUserId().toString() + "'" );
 				int find = db.numRows( DbUtils.prependTable( "databases" ), "user='" + session.getUserId().toString() + "'" );
 				if ( find == 0 ) {
 					//create it
@@ -212,12 +215,12 @@ public class DatabaseHandler {
 	}
 
 	public static void openDatabase( final UUID id ){
-		final MSplashScreen splash = new MSplashScreen( Main.class.getResource( "/loading.png" ), true, true, false, "", null, new Color( 0x00618A ), Color.black );
+		final MSplashScreen splash = new MSplashScreen( Main.class.getResource( "/loading.png" ), true, true, false, "", null, new Color( 0x00618A ), new Color( 0x002A3D ) );
 		splash.setIndeterminate( true );
 		splash.on();
 		Thread thread = new Thread( ){
 			public void run(){
-				splash.setProgress( "Connecting" );
+				splash.setProgress( "Connecting to " + getDatabase( id ).getName() );
 				ConnectedWindow connectedWindow = new ConnectedWindow( id );
 				connectedWindow.display();
 				splash.off();
