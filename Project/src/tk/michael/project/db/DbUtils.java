@@ -16,6 +16,11 @@ public class DbUtils {
 		return "mr2358174_" + getType( name ) + name;
 	}
 
+	/**
+	 * get type of table xref, entity, enum
+	 * @param name
+	 * @return
+	 */
 	public static String getType( String name ){
 		switch ( name ) {
 			case "users" :

@@ -41,6 +41,12 @@ public class DatabaseBox implements MouseListener{
 		init( name, host, username );
 	}
 
+	/**
+	 * init the graphics
+	 * @param nameStr name of db
+	 * @param hostStr host ip
+	 * @param usernameStr username
+	 */
 	public void init( String nameStr, String hostStr, String usernameStr ) {
 		initMenu();
 		panel = new JPanel( new MigLayout( "w 175px!, h 75px!" + ( Main.isDebugView() ? ",debug" : "" ) ) );
@@ -79,6 +85,9 @@ public class DatabaseBox implements MouseListener{
 
 	}
 
+	/**
+	 * init the right click menu
+	 */
 	public void initMenu(){
 		JMenuItem item = new JMenuItem("Open");
 		item.addActionListener(new ActionListener() {
@@ -140,6 +149,9 @@ public class DatabaseBox implements MouseListener{
 	@Override
 	public void mouseExited( MouseEvent e ) {}
 
+	/**
+	 * delete the database
+	 */
 	private void delete(){
 		int choice = JOptionPane.showConfirmDialog( null, "Are you sure you want to delete " + this.name.getText() + "?", "Delete", JOptionPane.YES_NO_OPTION );
 

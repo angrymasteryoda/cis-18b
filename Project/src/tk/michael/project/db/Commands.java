@@ -35,6 +35,7 @@ public class Commands {
 		boolean dQuote = false;
 		boolean sQuote = false;
 		boolean aQuote = false;
+		boolean comment = false;
 		int rightIndex = 0;
 		int leftIndex = 0;
 		int arrayOrder = 0; //to verify inserted in order
@@ -42,7 +43,20 @@ public class Commands {
 
 		for ( int i = 0; i < length; i++ ) {
 			char current = raw.charAt( i );
-			if ( current == '\'' ) {
+			String lookahead = "";
+			if ( length <= ( i + 3 ) ) {
+				lookahead = raw.substring( i, length );
+			} else{
+				lookahead = raw.substring( i, i + 3 );
+			}
+			if ( current == '#' || lookahead.startsWith( "-- " ) ) {
+				comment = true;
+			} else if( comment ){ //look for newline
+				if ( current == '\n' ) {
+					comment = false;
+					rightIndex = i + 1;
+				}
+			} else if ( current == '\'' ) {
 				if ( sQuote ) { //we found the ending quote
 					sQuote = false;
 				} else {
@@ -129,10 +143,18 @@ public class Commands {
 		}
 	}
 
+	/**
+	 * get all commands in arraylist
+	 * @return commands
+	 */
 	public ArrayList<String> getCommands() {
 		return commands;
 	}
 
+	/**
+	 * get the raw command string inputted
+	 * @return raw command string
+	 */
 	public String getRaw() {
 		return raw;
 	}
