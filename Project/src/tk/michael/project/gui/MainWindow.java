@@ -128,10 +128,10 @@ public class MainWindow extends BasicFrameObject implements MouseListener, Compo
 	public void updateDatabase(){
 		ArrayList<Database> dbs = DatabaseHandler.getDatabases();
 		int width = dbPanel.getWidth() == 0 ? dbWidth : dbPanel.getWidth();
-		float limit = width / 184.5f;
+		int limit = (int) Math.floor( width / 184.5f );
 		dbPanel.removeAll();
 		for ( int i = 0; i < dbs.size(); i++ ){
-			if ( i != 0 && i % ( (int) Math.floor( limit ) - 1 )== 0 ) {
+			if ( ( i % limit ) + 1 == limit ) {
 				dbPanel.add( new DatabaseBox( dbs.get( i ) ).getPanel(), "wrap" );
 			}
 			else {

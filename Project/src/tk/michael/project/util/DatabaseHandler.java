@@ -1,6 +1,8 @@
 package tk.michael.project.util;
 
 import com.michael.api.IO.IO;
+import com.michael.api.json.JSONArray;
+import com.michael.api.json.JSONObject;
 import com.michael.api.security.AES;
 import com.michael.api.swing.MSplashScreen;
 import tk.michael.project.Main;
@@ -122,12 +124,19 @@ public class DatabaseHandler {
 		return result;
 	}
 
+	public static String getDatabasesAsJSON(){
+		JSONArray array = new JSONArray();
+		for ( Database db : databases ) {
+			array.put( db.toJSON() );
+		}
+		return array.toString();
+	}
+
 	public static void saveDatabasesToDb(){
 		if ( Main.isLoggedIn() ) {
 			MysqlDatabase db = new MysqlDatabase();
 			Session session = Main.getLoginSession();
 			if ( db.open() ) {
-				//todo make this an xref table
 //				int find = db.numRows( DbUtils.prependTable( "user_database" ), "user='" + session.getUserId().toString() + "'" );
 				int find = db.numRows( DbUtils.prependTable( "databases" ), "user='" + session.getUserId().toString() + "'" );
 				if ( find == 0 ) {
@@ -137,7 +146,7 @@ public class DatabaseHandler {
 					try {
 						state.setString( 1, UUID.randomUUID().toString() );
 						state.setString( 2, Main.getLoginSession().getUserId().toString() );
-						state.setString( 3, getDatabasesAsString() );
+						state.setString( 3, getDatabasesAsJSON() );
 
 						find = state.executeUpdate();
 
@@ -152,7 +161,7 @@ public class DatabaseHandler {
 					PreparedStatement state = db.query( "UPDATE " + DbUtils.prependTable( "databases" ) + " SET dbs= ? WHERE user='" + session.getUserId().toString() + "'" );
 
 					try {
-						state.setString( 1, getDatabasesAsString() );
+						state.setString( 1, getDatabasesAsJSON() );
 
 						find = state.executeUpdate();
 
@@ -180,25 +189,22 @@ public class DatabaseHandler {
 					ResultSet resultSet = statement.executeQuery();
 					if ( resultSet.next() ) {
 						final String allDbs = resultSet.getString( 1 );
-						ArrayList<String> stringDb = new ArrayList<>( Arrays.asList( allDbs.split( ";" ) ) );
+						JSONArray json = new JSONArray( allDbs );
 						//clear databases
 						databases = new ArrayList<>();
-						for( String reading : stringDb ){
-							String[] split = reading.split( "\\|" );
-							String password = "";
-							try{ password = AES.decrypt( split[4] ); } catch ( Exception e  ){}
-							String dbName = "";
-							if ( split.length - 1 == 5 ){
-								dbName = split[5];
-							}
-							//	Localhost|localhost|3306|root|78dIHEN/0m8R/bXsb+iZsQ==|;
-							Database database = new Database(
-								split[0],
-								split[1],
-								split[2],
-								split[3],
+						for ( int i = 0; i < json.length(); i++ ) {
+							JSONObject dbJson = (JSONObject) json.get( i );
+							String password = dbJson.getString( "password" );
+							try {
+								password = AES.decrypt( password );
+							} catch ( Exception ignore ){}
+							Database database =  new Database(
+								dbJson.getString( "name" ),
+								dbJson.getString( "host" ),
+								dbJson.getString( "port" ),
+								dbJson.getString( "username" ),
 								password,
-								dbName
+								dbJson.getString( "dbName" )
 							);
 
 							databases.add( database );

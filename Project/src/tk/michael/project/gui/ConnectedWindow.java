@@ -60,22 +60,22 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 	 */
 	@Override
 	public void display(){
-		//check if we can even open the window
-		if ( WindowManager.open( dbId, frame ) ) {
-			//test we can connect first
-			ConnectionStatus status = MysqlDatabase.testConnection( this.database );
-			if ( status.isConnected() ) {
+		//test we can connect first
+		ConnectionStatus status = MysqlDatabase.testConnection( this.database );
+		if ( status.isConnected() ) {
+			//check if we can even open the window
+			if ( WindowManager.open( dbId, frame ) ) {
 				frame.setVisible( true );
-			} else {
-				JOptionPane.showOptionDialog( null, "Unable to open database.\nMake sure the information you provided is correct and you are connected to the internet.\n" + status.getReason(),
-					"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null );
-
 			}
-		}
-		else {
-			JOptionPane.showOptionDialog( null, "Already open. Can not open another",
+			else {
+				JOptionPane.showOptionDialog( null, "Already open. Can not open another",
+					"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null );
+			}
+		} else {
+			JOptionPane.showOptionDialog( null, "Unable to open database.\nMake sure the information you provided is correct and you are connected to the internet.\n" + status.getReason(),
 				"Error", JOptionPane.DEFAULT_OPTION, JOptionPane.ERROR_MESSAGE, null, null, null );
 		}
+
 	}
 
 	/**
@@ -238,6 +238,10 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		item.setActionCommand( "treeSelect" );
 		item.addActionListener( this );
 		navPopupMenu.add( item );
+		item = new JMenuItem( "name to script" );
+		item.setActionCommand( "treeToScript" );
+		item.addActionListener( this );
+		navPopupMenu.add( item );
 	}
 
 	/**
@@ -361,6 +365,11 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		if ( action.equals( "treeSelect" ) ) {
 			DatabaseTreeNode db = (DatabaseTreeNode) selectedNode.getPath()[1];
 			textPane.setText( "SELECT * FROM `" + db.getDbName() + "`.`" + selectedNode.getUserObject().toString() + "` LIMIT 1000;" );
+		}
+
+		if ( action.equals( "treeToScript" ) ) {
+			DatabaseTreeNode db = (DatabaseTreeNode) selectedNode.getPath()[1];
+			textPane.setText( textPane.getText() + "`" + db.getDbName() + "`.`" + selectedNode.getUserObject().toString() + "`" );
 		}
 
 		if ( action.equals( "runScript" ) ) {

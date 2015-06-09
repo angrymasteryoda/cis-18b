@@ -48,7 +48,6 @@ public class Main {
 
 		if ( !isArg( "dev" ) ) {
 			splash.on();
-			//Thread.sleep( 2000l ); //cause we load really fast
 		}
 		Thread thread = new Thread(  ){
 			public void run(){

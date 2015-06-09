@@ -118,6 +118,7 @@ public class Session implements Serializable {
 
 	public static void load(){
 		final Session session = read();
+		boolean expired = false;
 		if ( session != null ) {
 			long serverExpire = session.getExpires();
 			//verify server session exists and not expired
@@ -132,6 +133,7 @@ public class Session implements Serializable {
 					} else {
 						//doesn't exist in server so log out
 						session.expire();
+						expired = true;
 					}
 				} catch ( SQLException e ) {
 					IO.println( "Unable to talk to session server" );
@@ -139,7 +141,7 @@ public class Session implements Serializable {
 				}
 				if ( serverExpire < Util.getUnix() ) {
 					session.expire();
-				} else {
+				} else if ( !expired ) {
 					Main.login( session );
 				}
 			} else {

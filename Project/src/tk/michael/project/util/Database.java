@@ -1,8 +1,10 @@
 package tk.michael.project.util;
 
+import com.michael.api.json.JSONObject;
 import com.michael.api.security.AES;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -112,5 +114,16 @@ public class Database implements Serializable {
 			password + "|" +
 			databaseName
 		);
+	}
+
+	public JSONObject toJSON(){
+		HashMap<String, Object> map = new HashMap<>(  );
+		map.put( "name", name );
+		map.put( "host", host );
+		map.put( "port", port );
+		map.put( "username", username );
+		map.put( "password", password );
+		map.put( "dbName", databaseName );
+		return new JSONObject( map );
 	}
 }

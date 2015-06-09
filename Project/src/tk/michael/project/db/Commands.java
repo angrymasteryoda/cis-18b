@@ -36,6 +36,7 @@ public class Commands {
 		boolean sQuote = false;
 		boolean aQuote = false;
 		boolean comment = false;
+		boolean inlineComment = false;
 		int rightIndex = 0;
 		int leftIndex = 0;
 		int arrayOrder = 0; //to verify inserted in order
@@ -49,7 +50,15 @@ public class Commands {
 			} else{
 				lookahead = raw.substring( i, i + 3 );
 			}
-			if ( current == '#' || lookahead.startsWith( "-- " ) ) {
+
+			if( lookahead.startsWith( "/*" ) ) {
+				inlineComment = true;
+			} else if ( inlineComment ) {
+				if ( lookahead.startsWith( "*/" ) ) {
+					inlineComment = false;
+					rightIndex = i + 2;
+				}
+			} else if ( current == '#' || lookahead.startsWith( "-- " ) ) {
 				comment = true;
 			} else if( comment ){ //look for newline
 				if ( current == '\n' ) {
@@ -80,7 +89,21 @@ public class Commands {
 				commands.add( arrayOrder++, temp.trim() );
 				rightIndex = leftIndex + 1;
 			}
+		}
 
+		//check of invalid stuff as best i can
+		removeInvalid();
+	}
+
+	/**
+	 * remove invalid commands that happen
+	 */
+	private void removeInvalid() {
+		for ( int i = 0; i < commands.size(); i++ ) {
+			if ( commands.get( i ).matches( "^;$" ) ) {
+				commands.remove( i );
+				i--;
+			}
 		}
 	}
 
