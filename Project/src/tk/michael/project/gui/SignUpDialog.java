@@ -39,19 +39,19 @@ public class SignUpDialog extends ModalDialog implements ActionListener{
 		JPanel panel = new JPanel( new MigLayout(  ) );
 
 		labels.put( "user", new MLabel( "Username:" ) );
-		textFields.put( "user", new RegexTextField( "michael", 20, "notempty" ) );
+		textFields.put( "user", new RegexTextField( "", 20, "notempty" ) );
 
 		labels.put( "email", new MLabel( "Email:" ) );
-		textFields.put( "email", new RegexTextField( "w@w.w", 20, "[a-zA-Z0-9]+(?:(\\.|_)[A-Za-z0-9!#$%&'*+/=?^`{|}~-]+)*@(?!([a-zA-Z0-9]*\\.[a-zA-Z0-9]*\\.[a-zA-Z0-9]*\\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?"  ) );
+		textFields.put( "email", new RegexTextField( "", 20, "[a-zA-Z0-9]+(?:(\\.|_)[A-Za-z0-9!#$%&'*+/=?^`{|}~-]+)*@(?!([a-zA-Z0-9]*\\.[a-zA-Z0-9]*\\.[a-zA-Z0-9]*\\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?"  ) );
 
 		labels.put( "emailConf", new MLabel( "Confirm Email:" ) );
-		textFields.put( "emailConf", new RegexTextField( "w@w.w", 20, "[a-zA-Z0-9]+(?:(\\.|_)[A-Za-z0-9!#$%&'*+/=?^`{|}~-]+)*@(?!([a-zA-Z0-9]*\\.[a-zA-Z0-9]*\\.[a-zA-Z0-9]*\\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" ) );
+		textFields.put( "emailConf", new RegexTextField( "", 20, "[a-zA-Z0-9]+(?:(\\.|_)[A-Za-z0-9!#$%&'*+/=?^`{|}~-]+)*@(?!([a-zA-Z0-9]*\\.[a-zA-Z0-9]*\\.[a-zA-Z0-9]*\\.))(?:[A-Za-z0-9](?:[a-zA-Z0-9-]*[A-Za-z0-9])?\\.)+[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?" ) );
 
 		labels.put( "pass", new MLabel( "Password:" ) );
-		password = new JPasswordField( "123", 20 );
+		password = new JPasswordField( "", 20 );
 
 		labels.put( "passConf", new MLabel( "Confirm Password:" ) );
-		passwordConf = new JPasswordField( "123", 20 );
+		passwordConf = new JPasswordField( "", 20 );
 
 		JButton confirm = new JButton( "Sign Up" );
 		confirm.setActionCommand( "confirm" );

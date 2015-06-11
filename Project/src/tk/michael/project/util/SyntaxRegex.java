@@ -8,7 +8,7 @@ package tk.michael.project.util;
 public class SyntaxRegex {
 
 	public static String mysqlCommand(){
-		return"(\\W)*(?i:add|all|alter|analyze|as|asc|between|by|both|case|change|check|column|constraint|create|cross|databases|day_hour|day_minute|day_second|delayed|delete|desc|describe|sistinct|distinctrow|drop|else|enclosed|escaped|exists|explain|for|foreign|from|fulltext|grant|group|having|high_priority|hour_minute|hour_second|if|ignore|in|index|infile|inner|insert|into|is|join|key|keys|kill|leading|like|limit|load|lock|low_priority|match|minute_second|natural|on|optimize|option|optionally|order|outer|outfile|primary|procedure|purge|read|references|regexp|rename|replace|require|restrict|revoke|rlike|select|set|show|sql_big_result|sql_small_result|starting|staight_join|table|terminated|then|to|trailing|union|unique|unlock|update|usage|use|using|values|when|where|with|write|year_month)";
+		return"(\\W)*(?i:truncate|add|all|alter|analyze|as|asc|between|by|both|case|change|check|column|constraint|create|cross|databases|day_hour|day_minute|day_second|delayed|delete|desc|describe|sistinct|distinctrow|drop|else|enclosed|escaped|exists|explain|for|foreign|from|fulltext|grant|group|having|high_priority|hour_minute|hour_second|if|ignore|in|index|infile|inner|insert|into|is|join|key|keys|kill|leading|like|limit|load|lock|low_priority|match|minute_second|natural|on|optimize|option|optionally|order|outer|outfile|primary|procedure|purge|read|references|regexp|rename|replace|require|restrict|revoke|rlike|select|set|show|sql_big_result|sql_small_result|starting|staight_join|table|terminated|then|to|trailing|union|unique|unlock|update|usage|use|using|values|when|where|with|write|year_month)";
 	}
 
 	public static String mysqlDataType(){

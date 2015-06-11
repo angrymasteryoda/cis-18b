@@ -238,8 +238,16 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		item.setActionCommand( "treeSelect" );
 		item.addActionListener( this );
 		navPopupMenu.add( item );
-		item = new JMenuItem( "name to script" );
+		item = new JMenuItem( "Paste name to script" );
 		item.setActionCommand( "treeToScript" );
+		item.addActionListener( this );
+		navPopupMenu.add( item );
+		item = new JMenuItem( "Drop table" );
+		item.setActionCommand( "treeDrop" );
+		item.addActionListener( this );
+		navPopupMenu.add( item );
+		item = new JMenuItem( "Truncate table" );
+		item.setActionCommand( "treeTruncate" );
 		item.addActionListener( this );
 		navPopupMenu.add( item );
 	}
@@ -305,19 +313,19 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 			}
 		};
 		textPane = new JTextPane( doc );
-		textPane.setText(
-			"DROP TABLE IF EXISTS `test`;\n" +
-			"CREATE TABLE test (\n" +
-			"\tid varchar(20) NOT NULL,\n" +
-			"\tusername varchar(50) NOT NULL,\n" +
-			"\temail VARCHAR(255) NOT NULL,\n" +
-			"\tpassword VARCHAR(35) NOT NULL,\n" +
-			"\tcreated int(11) NOT NULL, \n" +
-			"\tPRIMARY KEY (id),\n" +
-			"\tINDEX (email)\n" +
-			");\n" +
-			"SELECT * FROM `cis18b`.`mr2358174_entity_databases` LIMIT 1000;"
-		);
+//		textPane.setText(
+//			"DROP TABLE IF EXISTS `test`;\n" +
+//			"CREATE TABLE test (\n" +
+//			"\tid varchar(20) NOT NULL,\n" +
+//			"\tusername varchar(50) NOT NULL,\n" +
+//			"\temail VARCHAR(255) NOT NULL,\n" +
+//			"\tpassword VARCHAR(35) NOT NULL,\n" +
+//			"\tcreated int(11) NOT NULL, \n" +
+//			"\tPRIMARY KEY (id),\n" +
+//			"\tINDEX (email)\n" +
+//			");\n" +
+//			"SELECT * FROM `cis18b`.`mr2358174_entity_databases` LIMIT 1000;"
+//		);
 	}
 
 	/**
@@ -365,11 +373,30 @@ public class ConnectedWindow extends BasicFrameObject implements ActionListener 
 		if ( action.equals( "treeSelect" ) ) {
 			DatabaseTreeNode db = (DatabaseTreeNode) selectedNode.getPath()[1];
 			textPane.setText( "SELECT * FROM `" + db.getDbName() + "`.`" + selectedNode.getUserObject().toString() + "` LIMIT 1000;" );
+			runCommand( textPane.getText() );
 		}
 
 		if ( action.equals( "treeToScript" ) ) {
 			DatabaseTreeNode db = (DatabaseTreeNode) selectedNode.getPath()[1];
 			textPane.setText( textPane.getText() + "`" + db.getDbName() + "`.`" + selectedNode.getUserObject().toString() + "`" );
+		}
+
+		if ( action.equals( "treeDrop" ) ) {
+			DatabaseTreeNode db = (DatabaseTreeNode) selectedNode.getPath()[1];
+			int choice = JOptionPane.showConfirmDialog( null, "Are you sure? This will delete the table", "Drop table", JOptionPane.YES_NO_OPTION );
+			if ( choice == JOptionPane.YES_OPTION ) {
+				textPane.setText( "DROP TABLE `" + db.getDbName() + "`.`" + selectedNode.getUserObject().toString() + "`;" );
+				runCommand( textPane.getText() );
+			}
+		}
+
+		if ( action.equals( "treeTruncate" ) ) {
+			DatabaseTreeNode db = (DatabaseTreeNode) selectedNode.getPath()[1];
+			int choice = JOptionPane.showConfirmDialog( null, "Are you sure? This will delete all data within table", "Truncate table", JOptionPane.YES_NO_OPTION );
+			if ( choice == JOptionPane.YES_OPTION ) {
+				textPane.setText( "TRUNCATE TABLE`" + db.getDbName() + "`.`" + selectedNode.getUserObject().toString() + "`;" );
+				runCommand( textPane.getText() );
+			}
 		}
 
 		if ( action.equals( "runScript" ) ) {
